@@ -55,7 +55,14 @@ BuildRequires: cmake(KF5Crash)
 BuildRequires: cmake(KF5Init)
 BuildRequires: cmake(KF5Notifications)
 BuildRequires: cmake(KF5Plasma)
+BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(xcb-image)
+BuildRequires: pkgconfig(xcb-icccm)
+BuildRequires: pkgconfig(wayland-client)
+BuildRequires: pkgconfig(wayland-cursor)
+BuildRequires: pkgconfig(wayland-egl)
+BuildRequires: pkgconfig(xcursor)
+BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: ninja
 
 %description
@@ -143,6 +150,8 @@ DESTDIR="%{buildroot}" ninja -C build install %{?_smp_mflags}
 %{_libdir}/plugins/kcm_kwin*
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
+%{_libdir}/libkdeinit5_kwin.so
+%{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
 %{_sysconfdir}/xdg/*
 %doc %{_docdir}/HTML/en/kcontrol/desktop
@@ -171,6 +180,10 @@ DESTDIR="%{buildroot}" ninja -C build install %{?_smp_mflags}
 
 %files devel
 %{_includedir}/*
-%{_libdir}/*.so
+%{_libdir}/libkwin4_effect_builtins.so
+%{_libdir}/libkdecorations.so
+%{_libdir}/libkwineffects.so
+%{_libdir}/libkwinglutils.so
+%{_libdir}/libkwinxrenderutils.so
 %{_libdir}/cmake/KDecorations
 %{_libdir}/cmake/KWinDBusInterface
