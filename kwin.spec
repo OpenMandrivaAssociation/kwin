@@ -52,6 +52,10 @@ BuildRequires: cmake(Gettext)
 BuildRequires: cmake(KF5NewStuff)
 BuildRequires: cmake(KF5KCMUtils)
 BuildRequires: cmake(KF5Crash)
+BuildRequires: cmake(KF5Init)
+BuildRequires: cmake(KF5Notifications)
+BuildRequires: cmake(KF5Plasma)
+BuildRequires: pkgconfig(xcb-image)
 BuildRequires: ninja
 
 %description
