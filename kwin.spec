@@ -22,7 +22,7 @@
 
 Name: kwin
 Version: 4.96.0
-Release: 1
+Release: 2
 Source0: http://ftp5.gwdg.de/pub/linux/kde/unstable/frameworks/%{version}/%{name}-%{version}.tar.xz
 Summary: The KWin window manager
 URL: http://kde.org/
