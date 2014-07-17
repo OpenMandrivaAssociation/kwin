@@ -21,9 +21,9 @@
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
 Name: kwin
-Version: 4.96.0
-Release: 3
-Source0: http://ftp5.gwdg.de/pub/linux/kde/unstable/frameworks/%{version}/%{name}-%{version}.tar.xz
+Version: 5.0.0
+Release: 1
+Source0: http://ftp5.gwdg.de/pub/linux/kde/stable/plasma/%{version}/%{name}-%{version}.tar.xz
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
@@ -135,8 +135,35 @@ ninja -C build
 %install
 DESTDIR="%{buildroot}" ninja -C build install %{?_smp_mflags}
 
-%files
-%{_bindir}/kwin
+%find_lang kcm-kwin-scripts
+%find_lang kcm_kwindesktop
+%find_lang kcm_kwintabbox
+%find_lang kcmkwincompositing
+%find_lang kcmkwindecoration
+%find_lang kcmkwinrules
+%find_lang kcmkwinscreenedges
+%find_lang kcmkwm
+%find_lang kwin
+%find_lang kwin_clients
+%find_lang kwin_effects
+%find_lang libkdecorations
+%find_lang kcm-kwin-scripts
+%find_lang kcm_kwindesktop
+%find_lang kcm_kwintabbox
+%find_lang kcmkwincompositing
+%find_lang kcmkwindecoration
+%find_lang kcmkwinrules
+%find_lang kcmkwinscreenedges
+%find_lang kcmkwm
+%find_lang kwin
+%find_lang kwin_clients
+%find_lang kwin_effects
+%find_lang kwin_scripting
+%find_lang libkdecorations
+cat *.lang >kwin-all.lang
+
+%files -f kwin-all.lang
+%{_bindir}/kwin_x11
 %{_datadir}/kwin
 %{_datadir}/kwincompositing
 %{_datadir}/kservices5/*
