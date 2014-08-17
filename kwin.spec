@@ -31,13 +31,15 @@ Group: System/Libraries
 BuildRequires: cmake
 BuildRequires: qmake5
 BuildRequires: extra-cmake-modules5
+# Some of the cmake(*) stuff below is provided by both kdelibs4-devel and
+# libKF5KDELibs4Support-devel - let's make sure we pick the right one
+BuildRequires: %mklibname -d KF5KDELibs4Support
 BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: cmake(KF5DocTools)
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(Qt5)
 BuildRequires: cmake(Qt5Test)
 BuildRequires: cmake(Qt5Multimedia)
-BuildRequires: cmake(KF5)
 BuildRequires: cmake(KF5)
 BuildRequires: cmake(KF5Activities)
 BuildRequires: cmake(KF5DocTools)
@@ -46,8 +48,6 @@ BuildRequires: cmake(EGL)
 BuildRequires: cmake(Wayland)
 BuildRequires: cmake(XKB)
 BuildRequires: cmake(XCB)
-BuildRequires: cmake(XCB)
-BuildRequires: cmake(Gettext)
 BuildRequires: cmake(KF5NewStuff)
 BuildRequires: cmake(KF5KCMUtils)
 BuildRequires: cmake(KF5Crash)
