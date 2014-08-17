@@ -21,7 +21,7 @@
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
 Name: kwin
-Version: 5.0.0
+Version: 5.0.1
 Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/stable/plasma/%{version}/%{name}-%{version}.tar.xz
 Summary: The KWin window manager
@@ -42,7 +42,6 @@ BuildRequires: cmake(KF5)
 BuildRequires: cmake(KF5Activities)
 BuildRequires: cmake(KF5DocTools)
 BuildRequires: cmake(OpenGL)
-BuildRequires: cmake(OpenGLES)
 BuildRequires: cmake(EGL)
 BuildRequires: cmake(Wayland)
 BuildRequires: cmake(XKB)
