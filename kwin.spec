@@ -62,6 +62,7 @@ BuildRequires: pkgconfig(wayland-cursor)
 BuildRequires: pkgconfig(wayland-egl)
 BuildRequires: pkgconfig(xcursor)
 BuildRequires: pkgconfig(xkbcommon)
+BuildRequires: pkgconfig(sm)
 BuildRequires: ninja
 
 %description
