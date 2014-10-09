@@ -21,9 +21,10 @@
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
 Name: kwin
-Version: 5.0.1
+Version: 5.0.95
 Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/stable/plasma/%{version}/%{name}-%{version}.tar.xz
+Source1000: %{name}.rpmlintrc
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
@@ -35,6 +36,7 @@ BuildRequires: extra-cmake-modules5
 # libKF5KDELibs4Support-devel - let's make sure we pick the right one
 BuildRequires: %mklibname -d KF5KDELibs4Support
 BuildRequires: pkgconfig(Qt5Core)
+BuildRequires: pkgconfig(epoxy)
 BuildRequires: cmake(KF5DocTools)
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(Qt5)
@@ -125,6 +127,8 @@ Provides: %{xrenderutilsdname} = %{EVRD}
 %description devel
 Development files for the KDE Frameworks 5 Win library
 
+%libpackage kwin 5
+
 %prep
 %setup -q
 %cmake -G Ninja
@@ -177,7 +181,7 @@ cat *.lang >kwin-all.lang
 %{_libdir}/plugins/kcm_kwin*
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
-%{_libdir}/libkdeinit5_kwin.so
+%{_libdir}/libkdeinit5_kwin_x11.so
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
 %{_sysconfdir}/xdg/*
