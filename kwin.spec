@@ -20,10 +20,12 @@
 %define xrenderutilsname %mklibname kwinxrenderutils %{xrenderutilsmajor}
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
+%define plasmaver %(echo %{version} |cut -d. -f1-3)
+
 Name: kwin
-Version: 5.0.95
+Version: 5.1.0.1
 Release: 1
-Source0: http://ftp5.gwdg.de/pub/linux/kde/stable/plasma/%{version}/%{name}-%{version}.tar.xz
+Source0: http://ftp5.gwdg.de/pub/linux/kde/stable/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: The KWin window manager
 URL: http://kde.org/
@@ -130,7 +132,7 @@ Development files for the KDE Frameworks 5 Win library
 %libpackage kwin 5
 
 %prep
-%setup -q
+%setup -qn %{name}-%{plasmaver}
 %cmake -G Ninja
 
 %build
@@ -195,19 +197,19 @@ cat *.lang >kwin-all.lang
 
 %files -n %{decorationsname}
 %{_libdir}/libkdecorations.so.%{decorationsmajor}
-%{_libdir}/libkdecorations.so.%{version}
+%{_libdir}/libkdecorations.so.%{plasmaver}
 
 %files -n %{effectsname}
 %{_libdir}/libkwineffects.so.%{effectsmajor}
-%{_libdir}/libkwineffects.so.%{version}
+%{_libdir}/libkwineffects.so.%{plasmaver}
 
 %files -n %{glutilsname}
 %{_libdir}/libkwinglutils.so.%{glutilsmajor}
-%{_libdir}/libkwinglutils.so.%{version}
+%{_libdir}/libkwinglutils.so.%{plasmaver}
 
 %files -n %{xrenderutilsname}
 %{_libdir}/libkwinxrenderutils.so.%{xrenderutilsmajor}
-%{_libdir}/libkwinxrenderutils.so.%{version}
+%{_libdir}/libkwinxrenderutils.so.%{plasmaver}
 
 %files devel
 %{_includedir}/*
