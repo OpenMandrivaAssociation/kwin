@@ -23,7 +23,7 @@
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 Name: kwin
-Version: 5.1.0.1
+Version: 5.1.1
 Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/stable/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -58,19 +58,39 @@ BuildRequires: cmake(KF5Crash)
 BuildRequires: cmake(KF5Init)
 BuildRequires: cmake(KF5Notifications)
 BuildRequires: cmake(KF5Plasma)
-BuildRequires: pkgconfig(xcb)
-BuildRequires: pkgconfig(xcb-image)
-BuildRequires: pkgconfig(xcb-icccm)
-BuildRequires: pkgconfig(wayland-client)
-BuildRequires: pkgconfig(wayland-cursor)
-BuildRequires: pkgconfig(wayland-egl)
-BuildRequires: pkgconfig(xcursor)
-BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(sm)
 BuildRequires: ninja
+Requires: %{name}-windowsystem = %{EVRD}
 
 %description
 The KWin window manager
+
+%package x11
+Summary: X11 Window System support for KWin
+Requires: %{name} = %{EVRD}
+Provides: %{name}-windowsystem = %{EVRD}
+Group: System/Libraries
+BuildRequires: pkgconfig(xcb)
+BuildRequires: pkgconfig(xcb-image)
+BuildRequires: pkgconfig(xcb-icccm)
+BuildRequires: pkgconfig(xcursor)
+BuildRequires: pkgconfig(xkbcommon)
+
+%description x11
+X11 Window System support for KWin
+
+%package wayland
+Summary: Wayland Window System support for KWin
+Requires: %{name} = %{EVRD}
+Provides: %{name}-windowsystem = %{EVRD}
+Group: System/Libraries
+BuildRequires: cmake(KF5Wayland)
+BuildRequires: pkgconfig(wayland-client)
+BuildRequires: pkgconfig(wayland-cursor)
+BuildRequires: pkgconfig(wayland-egl)
+
+%description wayland
+Wayland Window System support for KWin
 
 %package -n %{decorationsname}
 Summary: KWin effect library
@@ -169,7 +189,6 @@ DESTDIR="%{buildroot}" ninja -C build install %{?_smp_mflags}
 cat *.lang >kwin-all.lang
 
 %files -f kwin-all.lang
-%{_bindir}/kwin_x11
 %{_datadir}/kwin
 %{_datadir}/kwincompositing
 %{_datadir}/kservices5/*
@@ -183,7 +202,6 @@ cat *.lang >kwin-all.lang
 %{_libdir}/plugins/kcm_kwin*
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
-%{_libdir}/libkdeinit5_kwin_x11.so
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
 %{_sysconfdir}/xdg/*
@@ -191,6 +209,14 @@ cat *.lang >kwin-all.lang
 %doc %{_docdir}/HTML/en/kcontrol/kwin*
 %doc %{_docdir}/HTML/en/kcontrol/windowbehaviour
 %doc %{_docdir}/HTML/en/kcontrol/windowspecific
+
+%files x11
+%{_bindir}/kwin_x11
+%{_libdir}/libkdeinit5_kwin_x11.so
+
+%files wayland
+%{_bindir}/kwin_wayland
+%{_libdir}/libkdeinit5_kwin_wayland.so
 
 %files -n %{effectname}
 %{_libdir}/libkwin4_effect_builtins.so.%{effectmajor}*
