@@ -153,7 +153,8 @@ Development files for the KDE Frameworks 5 Win library
 
 %prep
 %setup -qn %{name}-%{plasmaver}
-%cmake -G Ninja
+%cmake -G Ninja \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 
 %build
 ninja -C build
@@ -196,10 +197,10 @@ cat *.lang >kwin-all.lang
 %{_datadir}/knotifications5/*
 %{_datadir}/icons/*/*/*/*
 %{_datadir}/dbus-1/*/*
-%{_libdir}/qml/org/kde/kwin
-%{_libdir}/plugins/kwin
-%{_libdir}/plugins/kwincompositing.so
-%{_libdir}/plugins/kcm_kwin*
+%{_libdir}/qt5/qml/org/kde/kwin
+%{_libdir}/qt5/plugins/kwin
+%{_libdir}/qt5/plugins/kwincompositing.so
+%{_libdir}/qt5/plugins/kcm_kwin*
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
