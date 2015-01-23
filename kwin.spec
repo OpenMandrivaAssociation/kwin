@@ -1,31 +1,29 @@
 %define debug_package %{nil}
 
-%define decorationsmajor 5
-%define decorationsname %mklibname kdecorations %{decorationsmajor}
-%define decorationsdname %mklibname kdecorations -d
-
 %define effectmajor 1
 %define effectname %mklibname kwin4_effect_builtins %{effectmajor}
 %define effectdname %mklibname kwin4_effect_builtins -d
 
-%define effectsmajor 5
+%define effectsmajor 6
 %define effectsname %mklibname keffects %{effectsmajor}
 %define effectsdname %mklibname keffects -d
 
-%define glutilsmajor 5
+%define glutilsmajor 6
 %define glutilsname %mklibname kwinglutils %{glutilsmajor}
 %define glutilsdname %mklibname kwinglutils -d
 
-%define xrenderutilsmajor 5
+%define xrenderutilsmajor 6
 %define xrenderutilsname %mklibname kwinxrenderutils %{xrenderutilsmajor}
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
+%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
+
 Name: kwin
-Version: 5.1.2
+Version: 5.1.95
 Release: 1
-Source0: http://ftp5.gwdg.de/pub/linux/kde/stable/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
+Source0: http://ftp5.gwdg.de/pub/linux/kde/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: The KWin window manager
 URL: http://kde.org/
@@ -34,6 +32,7 @@ Group: System/Libraries
 BuildRequires: cmake
 BuildRequires: qmake5
 BuildRequires: extra-cmake-modules5
+BuildRequires: qt5-qtmultimedia
 # Some of the cmake(*) stuff below is provided by both kdelibs4-devel and
 # libKF5KDELibs4Support-devel - let's make sure we pick the right one
 BuildRequires: %mklibname -d KF5KDELibs4Support
@@ -58,6 +57,7 @@ BuildRequires: cmake(KF5Crash)
 BuildRequires: cmake(KF5Init)
 BuildRequires: cmake(KF5Notifications)
 BuildRequires: cmake(KF5Plasma)
+BuildRequires: cmake(KDecoration2)
 BuildRequires: pkgconfig(sm)
 BuildRequires: ninja
 Requires: %{name}-windowsystem = %{EVRD}
@@ -91,14 +91,6 @@ BuildRequires: pkgconfig(wayland-egl)
 
 %description wayland
 Wayland Window System support for KWin
-
-%package -n %{decorationsname}
-Summary: KWin effect library
-Group: System/Libraries
-Requires: %{name} = %{EVRD}
-
-%description -n %{decorationsname}
-KWin effect library
 
 %package -n %{effectname}
 Summary: KWin effect library
@@ -135,12 +127,10 @@ KWin XRender utils library
 %package devel
 Summary: Development files for the KDE Frameworks 5 Win library
 Group: Development/KDE and Qt
-Requires: %{decorationsname} = %{EVRD}
 Requires: %{effectname} = %{EVRD}
 Requires: %{effectsname} = %{EVRD}
 Requires: %{glutilsname} = %{EVRD}
 Requires: %{xrenderutilsname} = %{EVRD}
-Provides: %{decorationsdname} = %{EVRD}
 Provides: %{effectdname} = %{EVRD}
 Provides: %{effectsdname} = %{EVRD}
 Provides: %{glutilsdname} = %{EVRD}
@@ -173,20 +163,7 @@ DESTDIR="%{buildroot}" ninja -C build install %{?_smp_mflags}
 %find_lang kwin
 %find_lang kwin_clients
 %find_lang kwin_effects
-%find_lang libkdecorations
-%find_lang kcm-kwin-scripts
-%find_lang kcm_kwindesktop
-%find_lang kcm_kwintabbox
-%find_lang kcmkwincompositing
-%find_lang kcmkwindecoration
-%find_lang kcmkwinrules
-%find_lang kcmkwinscreenedges
-%find_lang kcmkwm
-%find_lang kwin
-%find_lang kwin_clients
-%find_lang kwin_effects
 %find_lang kwin_scripting
-%find_lang libkdecorations
 cat *.lang >kwin-all.lang
 
 %files -f kwin-all.lang
@@ -201,6 +178,7 @@ cat *.lang >kwin-all.lang
 %{_libdir}/qt5/plugins/kwin
 %{_libdir}/qt5/plugins/kwincompositing.so
 %{_libdir}/qt5/plugins/kcm_kwin*
+%{_libdir}/qt5/plugins/org.kde.kdecoration2
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
@@ -222,10 +200,6 @@ cat *.lang >kwin-all.lang
 %files -n %{effectname}
 %{_libdir}/libkwin4_effect_builtins.so.%{effectmajor}*
 
-%files -n %{decorationsname}
-%{_libdir}/libkdecorations.so.%{decorationsmajor}
-%{_libdir}/libkdecorations.so.%{plasmaver}
-
 %files -n %{effectsname}
 %{_libdir}/libkwineffects.so.%{effectsmajor}
 %{_libdir}/libkwineffects.so.%{plasmaver}
@@ -241,9 +215,7 @@ cat *.lang >kwin-all.lang
 %files devel
 %{_includedir}/*
 %{_libdir}/libkwin4_effect_builtins.so
-%{_libdir}/libkdecorations.so
 %{_libdir}/libkwineffects.so
 %{_libdir}/libkwinglutils.so
 %{_libdir}/libkwinxrenderutils.so
-%{_libdir}/cmake/KDecorations
 %{_libdir}/cmake/KWinDBusInterface
