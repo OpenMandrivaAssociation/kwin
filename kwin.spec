@@ -205,8 +205,8 @@ cat *.lang >kwin-all.lang
 %{_libdir}/libkwineffects.so.%{plasmaver}
 
 %files -n %{glutilsname}
-%{_libdir}/libkwinglutils.so.%{glutilsmajor}
-%{_libdir}/libkwinglutils.so.%{plasmaver}
+%{_libdir}/libkwingl*utils.so.%{glutilsmajor}
+%{_libdir}/libkwingl*utils.so.%{plasmaver}
 
 %files -n %{xrenderutilsname}
 %{_libdir}/libkwinxrenderutils.so.%{xrenderutilsmajor}
@@ -216,6 +216,6 @@ cat *.lang >kwin-all.lang
 %{_includedir}/*
 %{_libdir}/libkwin4_effect_builtins.so
 %{_libdir}/libkwineffects.so
-%{_libdir}/libkwinglutils.so
+%{_libdir}/libkwingl*utils.so
 %{_libdir}/libkwinxrenderutils.so
 %{_libdir}/cmake/KWinDBusInterface
