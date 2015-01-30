@@ -184,10 +184,13 @@ cat *.lang >kwin-all.lang
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
 %{_sysconfdir}/xdg/*
-%doc %{_docdir}/HTML/en/kcontrol/desktop
-%doc %{_docdir}/HTML/en/kcontrol/kwin*
-%doc %{_docdir}/HTML/en/kcontrol/windowbehaviour
-%doc %{_docdir}/HTML/en/kcontrol/windowspecific
+%doc %{_docdir}/HTML/en_US/desktop
+%doc %{_docdir}/HTML/en_US/kwincompositing
+%doc %{_docdir}/HTML/en_US/kwindecoration
+%doc %{_docdir}/HTML/en_US/kwinscreenedges
+%doc %{_docdir}/HTML/en_US/kwintabbox
+%doc %{_docdir}/HTML/en_US/windowbehaviour
+%doc %{_docdir}/HTML/en_US/windowspecific
 
 %files x11
 %{_bindir}/kwin_x11
