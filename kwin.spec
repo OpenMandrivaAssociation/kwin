@@ -21,7 +21,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kwin
-Version: 5.2.0
+Version: 5.2.0.1
 Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -142,7 +142,7 @@ Development files for the KDE Frameworks 5 Win library
 %libpackage kwin 5
 
 %prep
-%setup -qn %{name}-%{plasmaver}
+%setup -q
 %cmake -G Ninja \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 
