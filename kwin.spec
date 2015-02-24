@@ -21,7 +21,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kwin
-Version: 5.2.0.1
+Version: 5.2.1
 Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -184,13 +184,13 @@ cat *.lang >kwin-all.lang
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
 %{_sysconfdir}/xdg/*
-%doc %{_docdir}/HTML/en_US/desktop
-%doc %{_docdir}/HTML/en_US/kwincompositing
-%doc %{_docdir}/HTML/en_US/kwindecoration
-%doc %{_docdir}/HTML/en_US/kwinscreenedges
-%doc %{_docdir}/HTML/en_US/kwintabbox
-%doc %{_docdir}/HTML/en_US/windowbehaviour
-%doc %{_docdir}/HTML/en_US/windowspecific
+%doc %{_docdir}/HTML/en/kcontrol/desktop
+%doc %{_docdir}/HTML/en/kcontrol/kwincompositing
+%doc %{_docdir}/HTML/en/kcontrol/kwindecoration
+%doc %{_docdir}/HTML/en/kcontrol/kwinscreenedges
+%doc %{_docdir}/HTML/en/kcontrol/kwintabbox
+%doc %{_docdir}/HTML/en/kcontrol/windowbehaviour
+%doc %{_docdir}/HTML/en/kcontrol/windowspecific
 
 %files x11
 %{_bindir}/kwin_x11
