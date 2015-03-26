@@ -21,7 +21,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kwin
-Version: 5.2.1
+Version: 5.2.2
 Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -36,61 +36,81 @@ BuildRequires: qt5-qtmultimedia
 # Some of the cmake(*) stuff below is provided by both kdelibs4-devel and
 # libKF5KDELibs4Support-devel - let's make sure we pick the right one
 BuildRequires: %mklibname -d KF5KDELibs4Support
-BuildRequires: pkgconfig(Qt5Core)
+BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(epoxy)
+BuildRequires: pkgconfig(Qt5Concurrent)
+BuildRequires: pkgconfig(Qt5Core)
+BuildRequires: pkgconfig(Qt5DBus)
+BuildRequires: pkgconfig(Qt5Gui)
+BuildRequires: pkgconfig(Qt5Multimedia)
+BuildRequires: pkgconfig(Qt5Network)
+BuildRequires: pkgconfig(Qt5Qml)
+BuildRequires: pkgconfig(Qt5Quick)
+BuildRequires: pkgconfig(Qt5QuickWidgets)
+BuildRequires: pkgconfig(Qt5Script)
+BuildRequires: pkgconfig(Qt5Test)
+BuildRequires: pkgconfig(Qt5UiTools)
+BuildRequires: pkgconfig(Qt5Widgets)
+BuildRequires: pkgconfig(Qt5X11Extras)
+BuildRequires: pkgconfig(udev)
+BuildRequires: pkgconfig(wayland-client)
+BuildRequires: pkgconfig(wayland-cursor)
+BuildRequires: pkgconfig(wayland-egl)
+BuildRequires: pkgconfig(x11)
+BuildRequires: pkgconfig(xcb)
+BuildRequires: pkgconfig(xcb-composite)
+BuildRequires: pkgconfig(xcb-damage)
+BuildRequires: pkgconfig(xcb-glx)
+BuildRequires: pkgconfig(xcb-icccm)
+BuildRequires: pkgconfig(xcb-image)
+BuildRequires: pkgconfig(xcb-keysyms)
+BuildRequires: pkgconfig(xcb-randr)
+BuildRequires: pkgconfig(xcb-render)
+BuildRequires: pkgconfig(xcb-shape)
+BuildRequires: pkgconfig(xcb-shm)
+BuildRequires: pkgconfig(xcb-sync)
+BuildRequires: pkgconfig(xcb-xfixes)
+BuildRequires: pkgconfig(xcb-xtest)
+BuildRequires: pkgconfig(xcursor)
+BuildRequires: pkgconfig(xkbcommon)
+BuildRequires: pkgconfig(sm)
 BuildRequires: cmake(KF5DocTools)
 BuildRequires: cmake(ECM)
-BuildRequires: cmake(Qt5)
-BuildRequires: cmake(Qt5Test)
-BuildRequires: cmake(Qt5Multimedia)
 BuildRequires: cmake(KF5)
 BuildRequires: cmake(KF5Activities)
 BuildRequires: cmake(KF5DocTools)
-BuildRequires: cmake(OpenGL)
-BuildRequires: cmake(EGL)
-BuildRequires: cmake(Wayland)
-BuildRequires: cmake(XKB)
-BuildRequires: cmake(XCB)
 BuildRequires: cmake(KF5NewStuff)
 BuildRequires: cmake(KF5KCMUtils)
 BuildRequires: cmake(KF5Crash)
 BuildRequires: cmake(KF5Init)
 BuildRequires: cmake(KF5Notifications)
 BuildRequires: cmake(KF5Plasma)
+BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(KDecoration2)
-BuildRequires: pkgconfig(sm)
+
 BuildRequires: ninja
 Requires: %{name}-windowsystem = %{EVRD}
 
 %description
-The KWin window manager
+The KWin window manager.
 
 %package x11
 Summary: X11 Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
 Group: System/Libraries
-BuildRequires: pkgconfig(xcb)
-BuildRequires: pkgconfig(xcb-image)
-BuildRequires: pkgconfig(xcb-icccm)
-BuildRequires: pkgconfig(xcursor)
-BuildRequires: pkgconfig(xkbcommon)
 
 %description x11
-X11 Window System support for KWin
+X11 Window System support for KWin.
 
 %package wayland
 Summary: Wayland Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
 Group: System/Libraries
-BuildRequires: cmake(KF5Wayland)
-BuildRequires: pkgconfig(wayland-client)
-BuildRequires: pkgconfig(wayland-cursor)
-BuildRequires: pkgconfig(wayland-egl)
 
 %description wayland
-Wayland Window System support for KWin
+Wayland Window System support for KWin.
 
 %package -n %{effectname}
 Summary: KWin effect library
@@ -98,7 +118,7 @@ Group: System/Libraries
 Requires: %{name} = %{EVRD}
 
 %description -n %{effectname}
-KWin effect library
+KWin effect library.
 
 %package -n %{effectsname}
 Summary: KWin effects library
@@ -106,7 +126,7 @@ Group: System/Libraries
 Requires: %{name} = %{EVRD}
 
 %description -n %{effectsname}
-KWin effects library
+KWin effects library.
 
 %package -n %{glutilsname}
 Summary: KWin GL utils library
@@ -114,7 +134,7 @@ Group: System/Libraries
 Requires: %{name} = %{EVRD}
 
 %description -n %{glutilsname}
-KWin GL utils library
+KWin GL utils library.
 
 %package -n %{xrenderutilsname}
 Summary: KWin XRender utils library
@@ -122,7 +142,7 @@ Group: System/Libraries
 Requires: %{name} = %{EVRD}
 
 %description -n %{xrenderutilsname}
-KWin XRender utils library
+KWin XRender utils library.
 
 %package devel
 Summary: Development files for the KDE Frameworks 5 Win library
@@ -137,7 +157,7 @@ Provides: %{glutilsdname} = %{EVRD}
 Provides: %{xrenderutilsdname} = %{EVRD}
 
 %description devel
-Development files for the KDE Frameworks 5 Win library
+Development files for the KDE Frameworks 5 Win library.
 
 %libpackage kwin 5
 
