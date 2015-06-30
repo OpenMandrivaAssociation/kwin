@@ -23,15 +23,12 @@
 Name: kwin
 Version: 5.3.2
 Release: 1
-Source0: http://ftp5.gwdg.de/pub/linux/kde/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
+Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
-BuildRequires: cmake
-BuildRequires: qmake5
-BuildRequires: extra-cmake-modules5
 BuildRequires: qt5-qtmultimedia
 # Some of the cmake(*) stuff below is provided by both kdelibs4-devel and
 # libKF5KDELibs4Support-devel - let's make sure we pick the right one
@@ -163,14 +160,13 @@ Development files for the KDE Frameworks 5 Win library.
 
 %prep
 %setup -q
-%cmake -G Ninja \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+%cmake_kde5
 
 %build
-ninja -C build
+%ninja -C build
 
 %install
-DESTDIR="%{buildroot}" ninja -C build install %{?_smp_mflags}
+%ninja_install -C build
 
 %find_lang kcm-kwin-scripts
 %find_lang kcm_kwindesktop
