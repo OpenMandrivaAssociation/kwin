@@ -84,8 +84,6 @@ BuildRequires: cmake(KF5Notifications)
 BuildRequires: cmake(KF5Plasma)
 BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(KDecoration2)
-
-BuildRequires: ninja
 Requires: %{name}-windowsystem = %{EVRD}
 
 %description
