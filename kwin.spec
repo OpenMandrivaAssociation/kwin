@@ -93,6 +93,7 @@ The KWin window manager.
 Summary: X11 Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
+Requires: qt5-output-driver-default
 Group: System/Libraries
 
 %description x11
@@ -102,6 +103,8 @@ X11 Window System support for KWin.
 Summary: Wayland Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
+Requires: qt5-qtwayland
+Requires: qt5-output-driver-eglfs
 Group: System/Libraries
 
 %description wayland
