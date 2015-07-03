@@ -22,9 +22,11 @@
 
 Name: kwin
 Version: 5.3.2
-Release: 2
+Release: 3
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
+Patch0: kwin-5.2.1-datapath.patch
+Patch1: kwin-5.3.0-enable-minimizeall.patch
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
@@ -163,6 +165,7 @@ Development files for the KDE Frameworks 5 Win library.
 
 %prep
 %setup -q
+%apply_patches
 %cmake_kde5
 
 %build
