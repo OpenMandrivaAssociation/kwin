@@ -22,7 +22,7 @@
 
 Name: kwin
 Version: 5.3.2
-Release: 4
+Release: 5
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Patch1: kwin-5.3.0-enable-minimizeall.patch
