@@ -180,6 +180,7 @@ cat *.lang >kwin-all.lang
 
 %files -f kwin-all.lang
 %{_datadir}/kwin
+%{_datadir}/kwin_wayland
 %{_datadir}/kwincompositing
 %{_datadir}/kservices5/*
 %{_datadir}/kservicetypes5/*
