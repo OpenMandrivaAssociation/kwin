@@ -88,6 +88,8 @@ BuildRequires: cmake(KF5Plasma)
 BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(KDecoration2)
 Requires: %{name}-windowsystem = %{EVRD}
+Obsoletes: %{name}-wayland < 5.4.0
+Provides: %{name}-wayland = 5.4.0
 
 %description
 The KWin window manager.
@@ -101,17 +103,6 @@ Group: System/Libraries
 
 %description x11
 X11 Window System support for KWin.
-
-%package wayland
-Summary: Wayland Window System support for KWin
-Requires: %{name} = %{EVRD}
-Provides: %{name}-windowsystem = %{EVRD}
-Requires: qt5-qtwayland
-Requires: qt5-output-driver-eglfs
-Group: System/Libraries
-
-%description wayland
-Wayland Window System support for KWin.
 
 %package -n %{effectname}
 Summary: KWin effect library
@@ -200,13 +191,14 @@ cat *.lang >kwin-all.lang
 %{_libdir}/qt5/plugins/kwincompositing.so
 %{_libdir}/qt5/plugins/kcm_kwin*
 %{_libdir}/qt5/plugins/org.kde.kdecoration2
+%{_libdir}/qt5/plugins/org.kde.kglobalaccel5.platforms
+%{_libdir}/qt5/plugins/org.kde.kwin.waylandbackends
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
 %{_sysconfdir}/xdg/*
 %doc %{_docdir}/HTML/en/kcontrol/desktop
-%doc %{_docdir}/HTML/en/kcontrol/kwincompositing
 %doc %{_docdir}/HTML/en/kcontrol/kwindecoration
 %doc %{_docdir}/HTML/en/kcontrol/kwinscreenedges
 %doc %{_docdir}/HTML/en/kcontrol/kwintabbox
@@ -216,10 +208,6 @@ cat *.lang >kwin-all.lang
 %files x11
 %{_bindir}/kwin_x11
 %{_libdir}/libkdeinit5_kwin_x11.so
-
-%files wayland
-%{_bindir}/kwin_wayland
-%{_libdir}/libkdeinit5_kwin_wayland.so
 
 %files -n %{effectname}
 %{_libdir}/libkwin4_effect_builtins.so.%{effectmajor}*
