@@ -22,7 +22,7 @@
 
 Name: kwin
 Version: 5.4.0
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Patch1: kwin-5.3.0-enable-minimizeall.patch
@@ -88,6 +88,7 @@ BuildRequires: cmake(KF5Plasma)
 BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(KDecoration2)
 Requires: %{name}-windowsystem = %{EVRD}
+Requires: qt5-qtmultimedia
 Obsoletes: %{name}-wayland < 5.4.0
 Provides: %{name}-wayland = 5.4.0
 
