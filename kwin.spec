@@ -87,6 +87,7 @@ BuildRequires: cmake(KF5Notifications)
 BuildRequires: cmake(KF5Plasma)
 BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(KDecoration2)
+BuildRequires: cmake(KF5IdleTime)
 Requires: %{name}-windowsystem = %{EVRD}
 Requires: qt5-qtmultimedia
 Obsoletes: %{name}-wayland < 5.4.0
