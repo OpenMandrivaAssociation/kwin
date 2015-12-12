@@ -4,15 +4,15 @@
 %define effectname %mklibname kwin4_effect_builtins %{effectmajor}
 %define effectdname %mklibname kwin4_effect_builtins -d
 
-%define effectsmajor 6
+%define effectsmajor 7
 %define effectsname %mklibname keffects %{effectsmajor}
 %define effectsdname %mklibname keffects -d
 
-%define glutilsmajor 6
+%define glutilsmajor 7
 %define glutilsname %mklibname kwinglutils %{glutilsmajor}
 %define glutilsdname %mklibname kwinglutils -d
 
-%define xrenderutilsmajor 6
+%define xrenderutilsmajor 7
 %define xrenderutilsname %mklibname kwinxrenderutils %{xrenderutilsmajor}
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
@@ -178,6 +178,7 @@ Development files for the KDE Frameworks 5 Win library.
 %find_lang kwin
 %find_lang kwin_clients
 %find_lang kwin_effects
+%find_lang kwin_scripts
 %find_lang kwin_scripting
 cat *.lang >kwin-all.lang
 
@@ -197,6 +198,8 @@ cat *.lang >kwin-all.lang
 %{_libdir}/qt5/plugins/org.kde.kdecoration2
 %{_libdir}/qt5/plugins/org.kde.kglobalaccel5.platforms
 %{_libdir}/qt5/plugins/org.kde.kwin.waylandbackends
+%{_libdir}/qt5/plugins/kf5/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
+%{_libdir}/qt5/plugins/platforms/KWinQpaPlugin.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
