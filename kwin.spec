@@ -4,15 +4,15 @@
 %define effectname %mklibname kwin4_effect_builtins %{effectmajor}
 %define effectdname %mklibname kwin4_effect_builtins -d
 
-%define effectsmajor 7
+%define effectsmajor 8
 %define effectsname %mklibname keffects %{effectsmajor}
 %define effectsdname %mklibname keffects -d
 
-%define glutilsmajor 7
+%define glutilsmajor 8
 %define glutilsname %mklibname kwinglutils %{glutilsmajor}
 %define glutilsdname %mklibname kwinglutils -d
 
-%define xrenderutilsmajor 7
+%define xrenderutilsmajor 8
 %define xrenderutilsname %mklibname kwinxrenderutils %{xrenderutilsmajor}
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
@@ -111,6 +111,7 @@ X11 Window System support for KWin.
 Summary: KWin effect library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
+Obsoletes: %{mklibname keffects 7} < 5.6.0
 
 %description -n %{effectname}
 KWin effect library.
@@ -127,6 +128,7 @@ KWin effects library.
 Summary: KWin GL utils library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
+Obsoletes: %{mklibname kwinglutils 7} < 5.6.0
 
 %description -n %{glutilsname}
 KWin GL utils library.
@@ -135,6 +137,7 @@ KWin GL utils library.
 Summary: KWin XRender utils library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
+Obsoletes: %{mklibname kwinxrenderutils 7} < 5.6.0
 
 %description -n %{xrenderutilsname}
 KWin XRender utils library.
