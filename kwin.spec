@@ -22,7 +22,7 @@
 
 Name: kwin
 Version: 5.6.4
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Patch1: kwin-5.3.0-enable-minimizeall.patch
@@ -101,7 +101,7 @@ The KWin window manager.
 Summary: X11 Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
-Requires: qt5-output-driver-default
+Requires: %{_lib}qt5-output-driver-default
 Group: System/Libraries
 
 %description x11
