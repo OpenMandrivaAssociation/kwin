@@ -21,7 +21,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kwin
-Version: 5.6.5
+Version: 5.7.0
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -107,6 +107,16 @@ Group: System/Libraries
 %description x11
 X11 Window System support for KWin.
 
+%package wayland
+Summary: Wayland Window System support for KWin
+Requires: %{name} = %{EVRD}
+Provides: %{name}-windowsystem = %{EVRD}
+Requires: %{_lib}qt5-output-driver-default
+Group: System/Libraries
+
+%description wayland
+Wayland Window System support for KWin.
+
 %package -n %{effectname}
 Summary: KWin effect library
 Group: System/Libraries
@@ -170,23 +180,22 @@ Development files for the KDE Frameworks 5 Win library.
 %install
 %ninja_install -C build
 
-%find_lang kcm-kwin-scripts
-%find_lang kcm_kwindesktop
-%find_lang kcm_kwintabbox
-%find_lang kcmkwincompositing
-%find_lang kcmkwindecoration
-%find_lang kcmkwinrules
-%find_lang kcmkwinscreenedges
-%find_lang kcmkwm
-%find_lang kwin
-%find_lang kwin_clients
-%find_lang kwin_effects
-%find_lang kwin_scripts
-%find_lang kwin_scripting
+%find_lang kcm-kwin-scripts || touch kcm-kwin-scripts.lang
+%find_lang kcm_kwindesktop || touch kcm_kwindesktop.lang
+%find_lang kcm_kwintabbox || touch kcm_kwintabbox.lang
+%find_lang kcmkwincompositing || touch kcmkwincompositing.lang
+%find_lang kcmkwindecoration || touch kcmkwindecoration.lang
+%find_lang kcmkwinrules || touch kcmkwinrules.lang
+%find_lang kcmkwinscreenedges || touch kcmkwinscreenedges.lang
+%find_lang kcmkwm || touch kcmkwm.lang
+%find_lang kwin || touch kwin.lang
+%find_lang kwin_clients || touch kwin_clients.lang
+%find_lang kwin_effects || touch kwin_effects.lang
+%find_lang kwin_scripts || touch kwin_scripts.lang
+%find_lang kwin_scripting || touch kwin_scripting.lang
 cat *.lang >kwin-all.lang
 
 %files -f kwin-all.lang
-%{_bindir}/kwin_wayland
 %{_datadir}/kwin
 %{_datadir}/kwincompositing
 %{_datadir}/kservices5/*
@@ -200,7 +209,7 @@ cat *.lang >kwin-all.lang
 %{_libdir}/qt5/plugins/kcm_kwin*
 %{_libdir}/qt5/plugins/org.kde.kdecoration2
 %{_libdir}/qt5/plugins/org.kde.kglobalaccel5.platforms
-%{_libdir}/qt5/plugins/org.kde.kwin.waylandbackends
+%dir %{_libdir}/qt5/plugins/org.kde.kwin.platforms
 %{_libdir}/qt5/plugins/kf5/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
 %{_libdir}/qt5/plugins/platforms/KWinQpaPlugin.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
@@ -210,6 +219,7 @@ cat *.lang >kwin-all.lang
 %{_sysconfdir}/xdg/*
 %doc %{_docdir}/HTML/en/kcontrol/desktop
 %doc %{_docdir}/HTML/en/kcontrol/kwindecoration
+%doc %{_docdir}/HTML/en/kcontrol/kwineffects
 %doc %{_docdir}/HTML/en/kcontrol/kwinscreenedges
 %doc %{_docdir}/HTML/en/kcontrol/kwintabbox
 %doc %{_docdir}/HTML/en/kcontrol/windowbehaviour
@@ -218,6 +228,11 @@ cat *.lang >kwin-all.lang
 %files x11
 %{_bindir}/kwin_x11
 %{_libdir}/libkdeinit5_kwin_x11.so
+%{_libdir}/qt5/plugins/org.kde.kwin.platforms/KWinX11Platform.so
+
+%files wayland
+%{_bindir}/kwin_wayland
+%{_libdir}/qt5/plugins/org.kde.kwin.waylandbackends
 
 %files -n %{effectname}
 %{_libdir}/libkwin4_effect_builtins.so.%{effectmajor}*
