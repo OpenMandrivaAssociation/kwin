@@ -89,6 +89,7 @@ BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(KDecoration2)
 BuildRequires: cmake(KF5IdleTime)
 BuildRequires: cmake(KScreenLocker)
+BuildRequires: cmake(Breeze)
 Requires: %{name}-windowsystem = %{EVRD}
 Requires: qt5-qtmultimedia
 Obsoletes: %{name}-wayland < 5.4.0
