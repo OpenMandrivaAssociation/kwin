@@ -8,7 +8,7 @@
 %define effectsname %mklibname keffects %{effectsmajor}
 %define effectsdname %mklibname keffects -d
 
-%define glutilsmajor 8
+%define glutilsmajor 9
 %define glutilsname %mklibname kwinglutils %{glutilsmajor}
 %define glutilsdname %mklibname kwinglutils -d
 
@@ -91,6 +91,7 @@ BuildRequires: cmake(KF5IdleTime)
 BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
 BuildRequires: x11-server-xwayland
+#BuildRequires: libhybris
 Requires: %{name}-windowsystem = %{EVRD}
 Requires: qt5-qtmultimedia
 Obsoletes: %{name}-wayland < 5.4.0
