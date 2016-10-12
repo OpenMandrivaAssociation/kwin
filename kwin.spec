@@ -4,7 +4,7 @@
 %define effectname %mklibname kwin4_effect_builtins %{effectmajor}
 %define effectdname %mklibname kwin4_effect_builtins -d
 
-%define effectsmajor 8
+%define effectsmajor 9
 %define effectsname %mklibname keffects %{effectsmajor}
 %define effectsdname %mklibname keffects -d
 
@@ -12,7 +12,7 @@
 %define glutilsname %mklibname kwinglutils %{glutilsmajor}
 %define glutilsdname %mklibname kwinglutils -d
 
-%define xrenderutilsmajor 8
+%define xrenderutilsmajor 9
 %define xrenderutilsname %mklibname kwinxrenderutils %{xrenderutilsmajor}
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
@@ -215,6 +215,7 @@ cat *.lang >kwin-all.lang
 %{_libdir}/qt5/plugins/platforms/KWinQpaPlugin.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
+%{_libdir}/libexec/org_kde_kwin_xclipboard_syncer
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
 %{_sysconfdir}/xdg/*
