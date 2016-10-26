@@ -22,7 +22,7 @@
 
 Name: kwin
 Version: 5.8.2
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Patch1: kwin-5.3.0-enable-minimizeall.patch
@@ -125,6 +125,7 @@ Summary: KWin effect library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname keffects 7} < 5.6.0
+Obsoletes: %{mklibname keffects 8} < 5.8.2
 
 %description -n %{effectname}
 KWin effect library.
@@ -142,6 +143,7 @@ Summary: KWin GL utils library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname kwinglutils 7} < 5.6.0
+Obsoletes: %{mklibname kwinglutils 8} < 5.8.2
 
 %description -n %{glutilsname}
 KWin GL utils library.
@@ -151,6 +153,7 @@ Summary: KWin XRender utils library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname kwinxrenderutils 7} < 5.6.0
+Obsoletes: %{mklibname kwinxrenderutils 8} < 5.8.2
 
 %description -n %{xrenderutilsname}
 KWin XRender utils library.
