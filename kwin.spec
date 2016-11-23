@@ -21,11 +21,12 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kwin
-Version: 5.8.3
+Version: 5.8.4
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Patch1: kwin-5.3.0-enable-minimizeall.patch
+Patch2: kwin-5.8.4-qt-5.8.patch
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
@@ -92,6 +93,9 @@ BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
 BuildRequires: x11-server-xwayland
 #BuildRequires: libhybris
+BuildRequires: %mklibname -d -s qt5eventdispatchersupport
+BuildRequires: %mklibname -d -s qt5fontdatabasesupport
+BuildRequires: %mklibname -d -s qt5themesupport
 Requires: %{name}-windowsystem = %{EVRD}
 Requires: qt5-qtmultimedia
 Obsoletes: %{name}-wayland < 5.4.0
