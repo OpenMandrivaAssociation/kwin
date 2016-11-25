@@ -26,7 +26,9 @@ Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Patch1: kwin-5.3.0-enable-minimizeall.patch
+%if %mdvver > 3000000
 Patch2: kwin-5.8.4-qt-5.8.patch
+%endif
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
@@ -93,9 +95,11 @@ BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
 BuildRequires: x11-server-xwayland
 #BuildRequires: libhybris
+%if %mdvver > 3000000
 BuildRequires: %mklibname -d -s qt5eventdispatchersupport
 BuildRequires: %mklibname -d -s qt5fontdatabasesupport
 BuildRequires: %mklibname -d -s qt5themesupport
+%endif
 Requires: %{name}-windowsystem = %{EVRD}
 Requires: qt5-qtmultimedia
 Obsoletes: %{name}-wayland < 5.4.0
