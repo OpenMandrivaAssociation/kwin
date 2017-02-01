@@ -4,15 +4,15 @@
 %define effectname %mklibname kwin4_effect_builtins %{effectmajor}
 %define effectdname %mklibname kwin4_effect_builtins -d
 
-%define effectsmajor 9
+%define effectsmajor 10
 %define effectsname %mklibname keffects %{effectsmajor}
 %define effectsdname %mklibname keffects -d
 
-%define glutilsmajor 9
+%define glutilsmajor 10
 %define glutilsname %mklibname kwinglutils %{glutilsmajor}
 %define glutilsdname %mklibname kwinglutils -d
 
-%define xrenderutilsmajor 9
+%define xrenderutilsmajor 10
 %define xrenderutilsname %mklibname kwinxrenderutils %{xrenderutilsmajor}
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
@@ -221,6 +221,7 @@ cat *.lang >kwin-all.lang
 %{_libdir}/qt5/plugins/kcm_kwin*
 %{_libdir}/qt5/plugins/org.kde.kdecoration2
 %{_libdir}/qt5/plugins/org.kde.kglobalaccel5.platforms
+%{_libdir}/qt5/plugins/kpackage/*
 %dir %{_libdir}/qt5/plugins/org.kde.kwin.platforms
 %{_libdir}/qt5/plugins/kf5/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
 %{_libdir}/qt5/plugins/platforms/KWinQpaPlugin.so
