@@ -25,7 +25,8 @@ Version: 5.9.0
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
-Patch1: kwin-5.3.0-enable-minimizeall.patch
+# (tpg) is it still needed ?
+#Patch1: kwin-5.3.0-enable-minimizeall.patch
 %if %mdvver > 3000000
 Patch2: kwin-5.8.4-qt-5.8.patch
 %endif
