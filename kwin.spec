@@ -93,11 +93,9 @@ BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
 BuildRequires: x11-server-xwayland
 #BuildRequires: libhybris
-%if %mdvver > 3000000
 BuildRequires: %mklibname -d -s qt5eventdispatchersupport
 BuildRequires: %mklibname -d -s qt5fontdatabasesupport
 BuildRequires: %mklibname -d -s qt5themesupport
-%endif
 Requires: %{name}-windowsystem = %{EVRD}
 Requires: qt5-qtmultimedia
 Obsoletes: %{name}-wayland < 5.4.0
