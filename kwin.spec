@@ -21,10 +21,11 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kwin
-Version: 5.10.2
+Version: 5.10.3
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
+Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
 Summary: The KWin window manager
