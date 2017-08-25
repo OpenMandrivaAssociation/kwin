@@ -1,0 +1,13 @@
+--- kwin-5.10.5/libkwineffects/kwinglutils.cpp.omv~	2017-08-25 23:22:25.878297458 +0200
++++ kwin-5.10.5/libkwineffects/kwinglutils.cpp	2017-08-25 23:23:01.881165547 +0200
+@@ -54,6 +54,10 @@ along with this program.  If not, see <h
+ #  define unlikely(x) (x)
+ #endif
+ 
++#ifndef GL_CONTEXT_LOST // For some reason, happens on aarch64
++#define GL_CONTEXT_LOST 0x0507
++#endif
++
+ namespace KWin
+ {
+ // Variables

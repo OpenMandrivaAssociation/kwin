@@ -28,6 +28,7 @@ Source1000: %{name}.rpmlintrc
 Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
+Patch2: kwin-5.10.5-aarch64-compile.patch
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
