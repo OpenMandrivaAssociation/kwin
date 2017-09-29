@@ -22,7 +22,7 @@
 
 Name: kwin
 Version: 5.10.5
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -191,6 +191,10 @@ Development files for the KDE Frameworks 5 Win library.
 
 %install
 %ninja_install -C build
+
+# (tpg) add missing symlinks
+ln -s %{_datadir}/kservicetypes5/kwineffect.desktop %{buildroot}%{_datadir}/kservicetypes5/kwin-effect.desktop
+ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kservicetypes5/kwin-script.desktop
 
 %find_lang kcm-kwin-scripts || touch kcm-kwin-scripts.lang
 %find_lang kcm_kwindesktop || touch kcm_kwindesktop.lang
