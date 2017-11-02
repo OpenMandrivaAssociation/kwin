@@ -22,7 +22,7 @@
 
 Name: kwin
 Version: 5.10.5
-Release: 2.1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -184,10 +184,6 @@ Development files for the KDE Frameworks 5 Win library.
 %prep
 %setup -q
 %apply_patches
-%define _disable_lto 1
-export CC=gcc
-export CXX=g++
-%cmake_kde5
 
 %build
 %ninja -C build
