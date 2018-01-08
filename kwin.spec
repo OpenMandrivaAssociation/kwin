@@ -21,7 +21,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kwin
-Version: 5.11.4
+Version: 5.11.5
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -29,6 +29,7 @@ Source1000: %{name}.rpmlintrc
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
 Patch2: kwin-5.10.5-aarch64-compile.patch
+Patch3: kwin-5.11.5-cmake-3.10.patch
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
