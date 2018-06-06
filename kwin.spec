@@ -22,7 +22,7 @@
 
 Name: kwin
 Version: 5.12.3
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -121,6 +121,7 @@ Summary: Wayland Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
 Requires: %{_lib}qt5-output-driver-default
+Requires(post): libcap-utils
 Group: System/Libraries
 
 %description wayland
@@ -197,6 +198,9 @@ ln -s %{_datadir}/kservicetypes5/kwineffect.desktop %{buildroot}%{_datadir}/kser
 ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kservicetypes5/kwin-script.desktop
 
 %find_lang %{name} --all-name --with-html --with-man
+
+%post wayland
+%{_sbindir}/setcap "CAP_SYS_RESOURCE=+ep" %{_bindir}/kwin_wayland
 
 %files -f %{name}.lang
 %{_datadir}/kwin
