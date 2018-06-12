@@ -22,7 +22,7 @@
 
 Name: kwin
 Version: 5.12.90
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -48,7 +48,6 @@ BuildRequires: pkgconfig(Qt5Network)
 BuildRequires: pkgconfig(Qt5Qml)
 BuildRequires: pkgconfig(Qt5Quick)
 BuildRequires: pkgconfig(Qt5QuickWidgets)
-BuildRequires: pkgconfig(Qt5QuickControls2)
 BuildRequires: pkgconfig(Qt5Script)
 BuildRequires: pkgconfig(Qt5Sensors)
 BuildRequires: pkgconfig(Qt5Test)
@@ -104,12 +103,17 @@ BuildRequires: cmake(KF5GlobalAccel)
 BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
 BuildRequires: x11-server-xwayland
+BuildRequires: qt5-qtvirtualkeyboard
+BuildRequires: qt5-qtquickcontrols
 #BuildRequires: libhybris
 BuildRequires: %mklibname -d -s qt5eventdispatchersupport
 BuildRequires: %mklibname -d -s qt5fontdatabasesupport
 BuildRequires: %mklibname -d -s qt5themesupport
 Requires: %{name}-windowsystem = %{EVRD}
 Requires: qt5-qtmultimedia
+Requires: qt5-qtvirtualkeyboard
+Requires: qt5-qtquickcontrols
+Requires: plasma-framework
 Obsoletes: %{name}-wayland < 5.4.0
 Provides: %{name}-wayland = 5.4.0
 
