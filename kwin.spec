@@ -92,6 +92,7 @@ BuildRequires: cmake(KF5Plasma)
 BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(KDecoration2)
 BuildRequires: cmake(KF5IdleTime)
+BuildRequires: cmake(KF5GlobalAccel)
 BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
 BuildRequires: x11-server-xwayland
