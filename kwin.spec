@@ -21,11 +21,11 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kwin
-Version: 5.10.5
-Release: 2
+Version: 5.12.3
+Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
-Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
+#Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
 Patch2: kwin-5.10.5-aarch64-compile.patch
@@ -195,22 +195,9 @@ Development files for the KDE Frameworks 5 Win library.
 ln -s %{_datadir}/kservicetypes5/kwineffect.desktop %{buildroot}%{_datadir}/kservicetypes5/kwin-effect.desktop
 ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kservicetypes5/kwin-script.desktop
 
-%find_lang kcm-kwin-scripts || touch kcm-kwin-scripts.lang
-%find_lang kcm_kwindesktop || touch kcm_kwindesktop.lang
-%find_lang kcm_kwintabbox || touch kcm_kwintabbox.lang
-%find_lang kcmkwincompositing || touch kcmkwincompositing.lang
-%find_lang kcmkwindecoration || touch kcmkwindecoration.lang
-%find_lang kcmkwinrules || touch kcmkwinrules.lang
-%find_lang kcmkwinscreenedges || touch kcmkwinscreenedges.lang
-%find_lang kcmkwm || touch kcmkwm.lang
-%find_lang kwin || touch kwin.lang
-%find_lang kwin_clients || touch kwin_clients.lang
-%find_lang kwin_effects || touch kwin_effects.lang
-%find_lang kwin_scripts || touch kwin_scripts.lang
-%find_lang kwin_scripting || touch kwin_scripting.lang
-cat *.lang >kwin-all.lang
+%find_lang %{name} --all-name --with-html --with-man
 
-%files -f kwin-all.lang
+%files -f %{name}.lang
 %{_datadir}/kwin
 %{_datadir}/kwincompositing
 %{_datadir}/kservices5/*
@@ -226,26 +213,24 @@ cat *.lang >kwin-all.lang
 %{_libdir}/qt5/plugins/org.kde.kglobalaccel5.platforms
 %{_libdir}/qt5/plugins/kpackage/*
 %dir %{_libdir}/qt5/plugins/org.kde.kwin.platforms
+%dir %{_libdir}/qt5/plugins/org.kde.kwin.scenes
 %{_libdir}/qt5/plugins/kf5/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
 %{_libdir}/qt5/plugins/platforms/KWinQpaPlugin.so
+%{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneQPainter.so
+%{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneOpenGL.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_libdir}/libexec/org_kde_kwin_xclipboard_syncer
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
+%{_datadir}/config.kcfg/kwin_colorcorrect.kcfg
 %{_sysconfdir}/xdg/*
-%doc %{_docdir}/HTML/en/kcontrol/desktop
-%doc %{_docdir}/HTML/en/kcontrol/kwindecoration
-%doc %{_docdir}/HTML/en/kcontrol/kwineffects
-%doc %{_docdir}/HTML/en/kcontrol/kwinscreenedges
-%doc %{_docdir}/HTML/en/kcontrol/kwintabbox
-%doc %{_docdir}/HTML/en/kcontrol/windowbehaviour
-%doc %{_docdir}/HTML/en/kcontrol/windowspecific
 
 %files x11
 %{_bindir}/kwin_x11
 %{_libdir}/libkdeinit5_kwin_x11.so
 %{_libdir}/qt5/plugins/org.kde.kwin.platforms/KWinX11Platform.so
+%{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneXRender.so
 
 %files wayland
 %{_bindir}/kwin_wayland
