@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   kwin-5.12.3.tar.xz: a09a8381ff1b2dbb12c8847a5fdad40891d25598
+sources:
+  kwin-5.12.6.tar.xz: ddb009f3a92881f8c5db4402431546f5bd3d19de
