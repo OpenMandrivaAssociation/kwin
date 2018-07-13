@@ -78,6 +78,7 @@ BuildRequires: pkgconfig(xcb-xtest)
 BuildRequires: pkgconfig(xcursor)
 BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(sm)
+BuildRequires: pkgconfig(libcap)
 BuildRequires: cmake(KF5DocTools)
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(KF5)
@@ -122,6 +123,7 @@ Summary: Wayland Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
 Requires: %{_lib}qt5-output-driver-default
+Requires(post): libcap-utils
 Group: System/Libraries
 
 %description wayland
@@ -198,6 +200,9 @@ ln -s %{_datadir}/kservicetypes5/kwineffect.desktop %{buildroot}%{_datadir}/kser
 ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kservicetypes5/kwin-script.desktop
 
 %find_lang %{name} --all-name --with-html --with-man
+
+%post wayland
+%{_sbindir}/setcap "CAP_SYS_RESOURCE=+ep" %{_bindir}/kwin_wayland
 
 %files -f %{name}.lang
 %{_datadir}/kwin
