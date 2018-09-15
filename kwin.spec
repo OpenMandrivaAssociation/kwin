@@ -21,7 +21,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kwin
-Version: 5.13.5
+Version: 5.13.90
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -217,6 +217,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_sbindir}/setcap "CAP_SYS_RESOURCE=+ep" %{_bindir}/kwin_wayland
 
 %files -f %{name}.lang
+%{_datadir}/kconf_update/kwin.upd
 %{_datadir}/kwin
 %{_datadir}/kwincompositing
 %{_datadir}/kservices5/*
