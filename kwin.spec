@@ -20,9 +20,12 @@
 
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
+# (tpg) optimize it a bit
+%global optflags %{optflags} -O3
+
 Name: kwin
 Version: 5.14.0
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -134,7 +137,9 @@ X11 Window System support for KWin.
 Summary: Wayland Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
+Requires: kwayland-integration
 Requires: %{_lib}qt5-output-driver-default
+Requires: x11-server-xwayland
 Requires(post): libcap-utils
 Group: System/Libraries
 
