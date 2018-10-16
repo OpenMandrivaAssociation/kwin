@@ -24,8 +24,8 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.14.0
-Release: 2
+Version: 5.14.1
+Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
