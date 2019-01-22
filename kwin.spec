@@ -4,17 +4,20 @@
 %define effectname %mklibname kwin4_effect_builtins %{effectmajor}
 %define effectdname %mklibname kwin4_effect_builtins -d
 
-%define effectsmajor 11
+%define effectsmajor 12
 %define effectsname %mklibname keffects %{effectsmajor}
 %define effectsdname %mklibname keffects -d
 
-%define glutilsmajor 11
+%define glutilsmajor 12
 %define glutilsname %mklibname kwinglutils %{glutilsmajor}
 %define glutilsdname %mklibname kwinglutils -d
 
-%define xrenderutilsmajor 11
+%define xrenderutilsmajor 12
 %define xrenderutilsname %mklibname kwinxrenderutils %{xrenderutilsmajor}
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
+
+%define kcmkwincommonmajor 5
+%define kcmkwincommon %mklibname kcmkwincommon %{kcmkwincommonmajor}
 
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
@@ -31,7 +34,7 @@
 %endif
 
 Name: kwin
-Version: 5.14.5
+Version: 5.14.90
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -159,6 +162,7 @@ Group: System/Libraries
 Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname keffects 7} < 5.6.0
 Obsoletes: %{mklibname keffects 8} < 5.8.2
+Obsoletes: %{mklibname keffects 11} < 5.14.90
 
 %description -n %{effectname}
 KWin effect library.
@@ -177,6 +181,7 @@ Group: System/Libraries
 Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname kwinglutils 7} < 5.6.0
 Obsoletes: %{mklibname kwinglutils 8} < 5.8.2
+Obsoletes: %{mklibname kwinglutils 11} < 5.14.90
 
 %description -n %{glutilsname}
 KWin GL utils library.
@@ -187,9 +192,18 @@ Group: System/Libraries
 Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname kwinxrenderutils 7} < 5.6.0
 Obsoletes: %{mklibname kwinxrenderutils 8} < 5.8.2
+Obsoletes: %{mklibname kwinxrenderutils 11} < 5.14.90
 
 %description -n %{xrenderutilsname}
 KWin XRender utils library.
+
+%package -n %{kcmkwincommon}
+Summary: KWin KCM library
+Group: System/Libraries
+Requires: %{name} = %{EVRD}
+
+%description -n %{kcmkwincommon}
+KWin KCM library.
 
 %package devel
 Summary: Development files for the KDE Frameworks 5 Win library
@@ -235,6 +249,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/kservices5/*
 %{_datadir}/kservicetypes5/*
 %{_datadir}/knotifications5/*
+%{_datadir}/kpackage/kcms/kcm_kwin_virtualdesktops
 %{_datadir}/icons/*/*/*/*
 %{_datadir}/dbus-1/*/*
 %{_libdir}/qt5/qml/org/kde/kwin
@@ -250,6 +265,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/qt5/plugins/platforms/KWinQpaPlugin.so
 %{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneQPainter.so
 %{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneOpenGL.so
+%{_libdir}/qt5/plugins/kcms/kcm_kwin_virtualdesktops.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_libdir}/libexec/org_kde_kwin_xclipboard_syncer
@@ -282,6 +298,10 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %files -n %{xrenderutilsname}
 %{_libdir}/libkwinxrenderutils.so.%{xrenderutilsmajor}
 %{_libdir}/libkwinxrenderutils.so.%{plasmaver}
+
+%files -n %{kcmkwincommon}
+%{_libdir}/libkcmkwincommon.so.%{kcmkwincommonmajor}
+%{_libdir}/libkcmkwincommon.so.%{plasmaver}
 
 %files devel
 %{_includedir}/*
