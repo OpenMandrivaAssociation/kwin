@@ -26,9 +26,9 @@
 # (tpg) optimize it a bit
 %global optflags %{optflags} -O3
 
-%ifarch %{ix86}
+%ifarch %{aarch64}
 # FIXME workaround for compile failure with clang 7.0.1
-# http://file-store.openmandriva.org/api/v1/file_stores/bc86ffde2e0dceae8ec9ec5af5feaf7455074492.log?show=true
+# https://abf.openmandriva.org/build_lists/357858
 %global __cc %{_bindir}/gcc
 %global __cxx %{_bindir}/g++
 %endif
