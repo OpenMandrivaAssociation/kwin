@@ -35,7 +35,7 @@
 
 Name: kwin
 Version: 5.15.4
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -115,6 +115,7 @@ BuildRequires: cmake(KF5IdleTime)
 BuildRequires: cmake(KF5GlobalAccel)
 BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
+BuildRequires: cmake(KF5Kirigami2)
 BuildRequires: x11-server-xwayland
 BuildRequires: qt5-qtvirtualkeyboard
 BuildRequires: qt5-qtquickcontrols
@@ -223,8 +224,7 @@ Development files for the KDE Frameworks 5 Win library.
 %libpackage kwin 5
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 %cmake_kde5
 
 %build
