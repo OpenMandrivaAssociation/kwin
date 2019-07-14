@@ -34,7 +34,7 @@
 %endif
 
 Name: kwin
-Version: 5.15.5
+Version: 5.16.3
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -244,7 +244,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %files -f %{name}.lang
 %{_datadir}/kconf_update/kwin.upd
 %{_datadir}/kwin
-%{_datadir}/kwincompositing
 %{_datadir}/kservices5/*
 %{_datadir}/kservicetypes5/*
 %{_datadir}/knotifications5/*
@@ -267,11 +266,16 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/qt5/plugins/kcms/kcm_kwin_virtualdesktops.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
-%{_libdir}/libexec/org_kde_kwin_xclipboard_syncer
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
 %{_datadir}/config.kcfg/kwin_colorcorrect.kcfg
 %{_sysconfdir}/xdg/*
+%{_libdir}/qt5/plugins/kcms/kcm_kwin_effects.so
+%{_libdir}/qt5/plugins/kcms/kcm_kwindecoration.so
+%{_libdir}/qt5/plugins/kf5/org.kde.kwindowsystem.platforms/KF5WindowSystemKWinPrivatePlugin.so
+%{_datadir}/knsrcfiles/*.knsrc
+%{_datadir}/kpackage/kcms/kcm_kwin_effects
+%{_datadir}/kpackage/kcms/kcm_kwindecoration
 
 %files x11
 %{_bindir}/kwin_x11
