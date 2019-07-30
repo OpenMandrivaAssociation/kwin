@@ -34,7 +34,7 @@
 %endif
 
 Name: kwin
-Version: 5.16.3
+Version: 5.16.4
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
