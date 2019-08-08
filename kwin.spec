@@ -26,13 +26,6 @@
 # (tpg) optimize it a bit
 %global optflags %{optflags} -O3
 
-%ifarch %{aarch64}
-# FIXME workaround for compile failure with clang 7.0.1
-# https://abf.openmandriva.org/build_lists/357858
-%global __cc %{_bindir}/gcc
-%global __cxx %{_bindir}/g++
-%endif
-
 Name: kwin
 Version: 5.16.4
 Release: 1
