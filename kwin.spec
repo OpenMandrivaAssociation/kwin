@@ -27,7 +27,7 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.16.5
+Version: 5.16.90
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -263,7 +263,8 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/config.kcfg/kwin.kcfg
 %{_datadir}/config.kcfg/kwin_colorcorrect.kcfg
-%{_sysconfdir}/xdg/*
+%{_datadir}/qlogging-categories5/*
+%{_datadir}/kconf_update/kwin-5.16-auto-bordersize.sh
 %{_libdir}/qt5/plugins/kcms/kcm_kwin_effects.so
 %{_libdir}/qt5/plugins/kcms/kcm_kwindecoration.so
 %{_libdir}/qt5/plugins/kf5/org.kde.kwindowsystem.platforms/KF5WindowSystemKWinPrivatePlugin.so
