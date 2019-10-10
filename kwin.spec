@@ -27,7 +27,7 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.16.90
+Version: 5.17.0
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -35,6 +35,7 @@ Source1000: %{name}.rpmlintrc
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
 Patch2: kwin-5.10.5-aarch64-compile.patch
+Patch3: kwin-5.17.0-libglvnd.patch
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
@@ -44,6 +45,7 @@ BuildRequires: qt5-qtmultimedia
 # libKF5KDELibs4Support-devel - let's make sure we pick the right one
 BuildRequires: %mklibname -d KF5KDELibs4Support
 BuildRequires: pkgconfig(egl)
+BuildRequires: %{_lib}EGL_mesa-devel
 BuildRequires: pkgconfig(epoxy)
 BuildRequires: pkgconfig(Qt5Concurrent)
 BuildRequires: pkgconfig(Qt5Core)
