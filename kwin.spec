@@ -28,7 +28,7 @@
 
 Name: kwin
 Version: 5.17.0
-Release: 2
+Release: 3
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -67,6 +67,7 @@ BuildRequires: pkgconfig(fontconfig)
 BuildRequires: pkgconfig(libinput)
 BuildRequires: pkgconfig(gbm)
 BuildRequires: pkgconfig(udev)
+BuildRequires: pkgconfig(libdrm)
 BuildRequires: pkgconfig(wayland-client)
 BuildRequires: pkgconfig(wayland-cursor)
 BuildRequires: pkgconfig(wayland-egl)
