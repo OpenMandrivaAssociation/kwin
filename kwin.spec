@@ -28,7 +28,7 @@
 
 Name: kwin
 Version: 5.17.0
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -123,6 +123,8 @@ Requires: qt5-qtmultimedia
 Requires: qt5-qtvirtualkeyboard
 Requires: qt5-qtquickcontrols
 Requires: plasma-framework
+#(tpg) this is needed for kcm_kwin_effects
+Requires: glib-networking
 Obsoletes: %{name}-wayland < 5.4.0
 Provides: %{name}-wayland = 5.4.0
 
