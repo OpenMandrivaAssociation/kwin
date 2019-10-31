@@ -27,7 +27,7 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.17.1
+Version: 5.17.2
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -35,7 +35,6 @@ Source1000: %{name}.rpmlintrc
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
 Patch2: kwin-5.10.5-aarch64-compile.patch
-Patch3: kwin-5.17.0-libglvnd.patch
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
