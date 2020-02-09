@@ -27,8 +27,8 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.17.5
-Release: 2
+Version: 5.18.0
+Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -240,7 +240,10 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_sbindir}/setcap "CAP_SYS_RESOURCE=+ep" %{_bindir}/kwin_wayland
 
 %files -f %{name}.lang
+%{_datadir}/config.kcfg/*
 %{_datadir}/kconf_update/kwin.upd
+%{_datadir}/kconf_update/kwin-5.18-move-animspeed.py
+%{_datadir}/kconf_update/__pycache__/*
 %{_datadir}/kwin
 %{_datadir}/kservices5/*
 %{_datadir}/kservicetypes5/*
