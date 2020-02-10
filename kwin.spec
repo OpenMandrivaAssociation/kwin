@@ -243,7 +243,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/config.kcfg/*
 %{_datadir}/kconf_update/kwin.upd
 %{_datadir}/kconf_update/kwin-5.18-move-animspeed.py
-%{_datadir}/kconf_update/__pycache__/*
 %{_datadir}/kwin
 %{_datadir}/kservices5/*
 %{_datadir}/kservicetypes5/*
