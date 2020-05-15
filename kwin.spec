@@ -27,7 +27,7 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.18.5
+Version: 5.18.90
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -266,9 +266,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/qt5/plugins/kcms/kcm_kwin_virtualdesktops.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
-%{_libdir}/libkdeinit5_kwin_rules_dialog.so
-%{_datadir}/config.kcfg/kwin.kcfg
-%{_datadir}/config.kcfg/kwin_colorcorrect.kcfg
 %{_datadir}/qlogging-categories5/*
 %{_datadir}/kconf_update/kwin-5.16-auto-bordersize.sh
 %{_libdir}/qt5/plugins/kcms/kcm_kwin_effects.so
@@ -277,10 +274,11 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/knsrcfiles/*.knsrc
 %{_datadir}/kpackage/kcms/kcm_kwin_effects
 %{_datadir}/kpackage/kcms/kcm_kwindecoration
+%{_libdir}/qt5/plugins/kcms/kcm_kwinrules.so
+%{_datadir}/kpackage/kcms/kcm_kwinrules
 
 %files x11
 %{_bindir}/kwin_x11
-%{_libdir}/libkdeinit5_kwin_x11.so
 %{_libdir}/qt5/plugins/org.kde.kwin.platforms/KWinX11Platform.so
 %{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneXRender.so
 
