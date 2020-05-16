@@ -111,6 +111,7 @@ BuildRequires: cmake(KF5GlobalAccel)
 BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
 BuildRequires: cmake(KF5Kirigami2)
+BuildRequires: cmake(KWaylandServer)
 BuildRequires: x11-server-xwayland
 BuildRequires: qt5-qtvirtualkeyboard
 BuildRequires: qt5-qtquickcontrols
