@@ -137,6 +137,7 @@ Summary: X11 Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
 Requires: %{_lib}qt5-output-driver-default
+Requires: kwindowsystem-x11
 Group: System/Libraries
 
 %description x11
@@ -149,6 +150,7 @@ Provides: %{name}-windowsystem = %{EVRD}
 Requires: kwayland-integration
 Requires: %{_lib}qt5-output-driver-default
 Requires: x11-server-xwayland
+Requires: kwindowsystem-wayland
 Requires(post): libcap-utils
 Group: System/Libraries
 
