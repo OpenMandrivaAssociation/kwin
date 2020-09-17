@@ -27,7 +27,7 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.19.5
+Version: 5.19.90
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -267,6 +267,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneQPainter.so
 %{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneOpenGL.so
 %{_libdir}/qt5/plugins/kcms/kcm_kwin_virtualdesktops.so
+%{_libdir}/qt5/plugins/kf5/kwindowsystem/KF5WindowSystemKWinPrivatePlugin.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_datadir}/qlogging-categories5/*
@@ -274,7 +275,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/kconf_update/kwinrules*
 %{_libdir}/qt5/plugins/kcms/kcm_kwin_effects.so
 %{_libdir}/qt5/plugins/kcms/kcm_kwindecoration.so
-%{_libdir}/qt5/plugins/kf5/org.kde.kwindowsystem.platforms/KF5WindowSystemKWinPrivatePlugin.so
 %{_datadir}/knsrcfiles/*.knsrc
 %{_datadir}/kpackage/kcms/kcm_kwin_effects
 %{_datadir}/kpackage/kcms/kcm_kwindecoration
@@ -285,10 +285,12 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_bindir}/kwin_x11
 %{_libdir}/qt5/plugins/org.kde.kwin.platforms/KWinX11Platform.so
 %{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneXRender.so
+%{_prefix}/lib/systemd/user/plasma-kwin_x11.service
 
 %files wayland
 %{_bindir}/kwin_wayland
 %{_libdir}/qt5/plugins/org.kde.kwin.waylandbackends
+%{_prefix}/lib/systemd/user/plasma-kwin_wayland.service
 
 %files -n %{effectname}
 %{_libdir}/libkwin4_effect_builtins.so.%{effectmajor}*
