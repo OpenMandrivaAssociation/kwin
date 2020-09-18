@@ -115,6 +115,7 @@ BuildRequires: cmake(KF5Kirigami2)
 BuildRequires: cmake(KWaylandServer)
 BuildRequires: x11-server-xwayland
 BuildRequires: qt5-qtvirtualkeyboard
+BuildRequires: qt5-qtwayland
 BuildRequires: qt5-qtquickcontrols
 #BuildRequires: libhybris
 BuildRequires: %mklibname -d -s qt5eventdispatchersupport
