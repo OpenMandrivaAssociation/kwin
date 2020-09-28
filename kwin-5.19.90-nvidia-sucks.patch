@@ -1,0 +1,15 @@
+diff -up kwin-5.19.90/libkwineffects/kwinglplatform.cpp.omv~ kwin-5.19.90/libkwineffects/kwinglplatform.cpp
+--- kwin-5.19.90/libkwineffects/kwinglplatform.cpp.omv~	2020-09-28 19:33:02.264344520 +0200
++++ kwin-5.19.90/libkwineffects/kwinglplatform.cpp	2020-09-28 19:36:27.361957963 +0200
+@@ -1039,6 +1039,11 @@ void GLPlatform::detect(OpenGLPlatformIn
+     if (isGLES()) {
+         m_supportsGLSL = true;
+         m_limitedGLSL = false;
++	// Sadly, Nazividia sucks badly and has buggy drivers...
++	if (isNvidia()) {
++            m_recommendedCompositor = XRenderCompositing;
++            m_limitedGLSL = m_supportsGLSL = false;
++	}
+     }
+ }
+ 

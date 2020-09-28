@@ -35,6 +35,7 @@ Source1000: %{name}.rpmlintrc
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
 Patch2: kwin-5.10.5-aarch64-compile.patch
+Patch3:	kwin-5.19.90-nvidia-sucks.patch
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
