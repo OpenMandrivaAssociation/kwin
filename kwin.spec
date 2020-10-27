@@ -27,7 +27,7 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.20.1
+Version: 5.20.2
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
