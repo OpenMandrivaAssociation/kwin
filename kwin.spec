@@ -28,7 +28,7 @@
 
 Name: kwin
 Version: 5.20.4
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -113,6 +113,7 @@ BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
 BuildRequires: cmake(KF5Kirigami2)
 BuildRequires: cmake(KWaylandServer)
+BuildRequires: cmake(QAccessibilityClient)
 BuildRequires: x11-server-xwayland
 BuildRequires: qt5-qtvirtualkeyboard
 BuildRequires: qt5-qtwayland
