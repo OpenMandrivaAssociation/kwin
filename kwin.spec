@@ -28,7 +28,7 @@
 
 Name: kwin
 Version: 5.20.4
-Release: 2
+Release: 3
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
