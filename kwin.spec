@@ -4,15 +4,15 @@
 %define effectname %mklibname kwin4_effect_builtins %{effectmajor}
 %define effectdname %mklibname kwin4_effect_builtins -d
 
-%define effectsmajor 12
+%define effectsmajor 13
 %define effectsname %mklibname keffects %{effectsmajor}
 %define effectsdname %mklibname keffects -d
 
-%define glutilsmajor 12
+%define glutilsmajor 13
 %define glutilsname %mklibname kwinglutils %{glutilsmajor}
 %define glutilsdname %mklibname kwinglutils -d
 
-%define xrenderutilsmajor 12
+%define xrenderutilsmajor 13
 %define xrenderutilsname %mklibname kwinxrenderutils %{xrenderutilsmajor}
 %define xrenderutilsdname %mklibname kwinxrenderutils -d
 
@@ -27,7 +27,7 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.20.5
+Version: 5.21.0
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -167,6 +167,7 @@ Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname keffects 7} < 5.6.0
 Obsoletes: %{mklibname keffects 8} < 5.8.2
 Obsoletes: %{mklibname keffects 11} < 5.14.90
+Obsoletes: %{mklibname keffects 12} < 5.20.90
 
 %description -n %{effectname}
 KWin effect library.
@@ -175,6 +176,7 @@ KWin effect library.
 Summary: KWin effects library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
+Obsoletes: %{mklibname kwineffects 12} < 5.20.90
 
 %description -n %{effectsname}
 KWin effects library.
@@ -186,6 +188,7 @@ Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname kwinglutils 7} < 5.6.0
 Obsoletes: %{mklibname kwinglutils 8} < 5.8.2
 Obsoletes: %{mklibname kwinglutils 11} < 5.14.90
+Obsoletes: %{mklibname kwinglutils 12} < 5.20.90
 
 %description -n %{glutilsname}
 KWin GL utils library.
@@ -197,6 +200,7 @@ Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname kwinxrenderutils 7} < 5.6.0
 Obsoletes: %{mklibname kwinxrenderutils 8} < 5.8.2
 Obsoletes: %{mklibname kwinxrenderutils 11} < 5.14.90
+Obsoletes: %{mklibname kwinxrenderutils 12} < 5.20.90
 
 %description -n %{xrenderutilsname}
 KWin XRender utils library.
@@ -261,16 +265,12 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/qt5/plugins/kwincompositing.so
 %{_libdir}/qt5/plugins/kcm_kwin*
 %{_libdir}/qt5/plugins/org.kde.kdecoration2
-%{_libdir}/qt5/plugins/org.kde.kglobalaccel5.platforms
 %{_libdir}/qt5/plugins/kpackage/*
 %dir %{_libdir}/qt5/plugins/org.kde.kwin.platforms
 %dir %{_libdir}/qt5/plugins/org.kde.kwin.scenes
-%{_libdir}/qt5/plugins/kf5/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
-%{_libdir}/qt5/plugins/platforms/KWinQpaPlugin.so
 %{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneQPainter.so
 %{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneOpenGL.so
 %{_libdir}/qt5/plugins/kcms/kcm_kwin_virtualdesktops.so
-%{_libdir}/qt5/plugins/kf5/kwindowsystem/KF5WindowSystemKWinPrivatePlugin.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_datadir}/qlogging-categories5/*
@@ -283,6 +283,9 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/kpackage/kcms/kcm_kwindecoration
 %{_libdir}/qt5/plugins/kcms/kcm_kwinrules.so
 %{_datadir}/kpackage/kcms/kcm_kwinrules
+%{_datadir}/kconf_update/kwin-5.21-desktop-grid-click-behavior.py
+%{_datadir}/kconf_update/kwin-5.21-no-swap-encourage.py
+%{_datadir}/krunner/dbusplugins/kwin-runner-windows.desktop
 
 %files x11
 %{_bindir}/kwin_x11
@@ -292,8 +295,8 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 
 %files wayland
 %{_bindir}/kwin_wayland
+%{_bindir}/kwin_wayland_wrapper
 %{_libdir}/qt5/plugins/org.kde.kwin.waylandbackends
-%{_prefix}/lib/systemd/user/plasma-kwin_wayland.service
 
 %files -n %{effectname}
 %{_libdir}/libkwin4_effect_builtins.so.%{effectmajor}*
@@ -321,3 +324,4 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/libkwingl*utils.so
 %{_libdir}/libkwinxrenderutils.so
 %{_libdir}/cmake/KWinDBusInterface
+%{_libdir}/cmake/KWinEffects
