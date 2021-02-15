@@ -115,6 +115,9 @@ BuildRequires: cmake(Breeze)
 BuildRequires: cmake(KF5Kirigami2)
 BuildRequires: cmake(KWaylandServer)
 BuildRequires: cmake(QAccessibilityClient)
+BuildRequires: cmake(KF5Runner)
+BuildRequires: pkgconfig(lcms2)
+BuildRequires: pkgconfig(libpipewire-0.3)
 BuildRequires: x11-server-xwayland
 BuildRequires: qt5-qtvirtualkeyboard
 BuildRequires: qt5-qtwayland
