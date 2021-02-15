@@ -154,6 +154,7 @@ Requires: kwayland-integration
 Requires: %{_lib}qt5-output-driver-default
 Requires: x11-server-xwayland
 Requires: kwindowsystem-wayland
+Requires: kwayland-server
 Requires(post): libcap-utils
 Group: System/Libraries
 
