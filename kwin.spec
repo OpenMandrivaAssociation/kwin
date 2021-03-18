@@ -25,9 +25,11 @@
 
 # (tpg) optimize it a bit
 %global optflags %{optflags} -O3
+# FIXME workaround for clang 12 bug: lld crash at linking time
+%define _disable_lto 1
 
 Name: kwin
-Version: 5.21.2
+Version: 5.21.3
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
