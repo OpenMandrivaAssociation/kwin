@@ -27,8 +27,8 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.21.3
-Release: 2
+Version: 5.21.4
+Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -133,8 +133,6 @@ Requires: qt5-qtquickcontrols
 Requires: plasma-framework
 #(tpg) this is needed for kcm_kwin_effects
 Requires: glib-networking
-Obsoletes: %{name}-wayland < 5.4.0
-Provides: %{name}-wayland = 5.4.0
 
 %description
 The KWin window manager.
@@ -145,6 +143,7 @@ Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
 Requires: %{_lib}qt5-output-driver-default
 Requires: kwindowsystem-x11
+Requires: libkscreen-x11
 Group: System/Libraries
 
 %description x11
@@ -159,6 +158,7 @@ Requires: %{_lib}qt5-output-driver-default
 Requires: x11-server-xwayland
 Requires: kwindowsystem-wayland
 Requires: kwayland-server
+Requires: libkscreen-wayland
 Requires(post): libcap-utils
 Group: System/Libraries
 
