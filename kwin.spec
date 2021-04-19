@@ -28,7 +28,7 @@
 
 Name: kwin
 Version: 5.21.4
-Release: 2
+Release: 3
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -36,6 +36,7 @@ Source1000: %{name}.rpmlintrc
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
 Patch2: kwin-5.10.5-aarch64-compile.patch
 Patch3: kwin-5.21.0-fix-cmake-deps.patch
+Patch4: https://invent.kde.org/plasma/kwin/-/merge_requests/751.patch
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
