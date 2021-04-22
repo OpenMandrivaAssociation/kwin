@@ -28,7 +28,7 @@
 
 Name: kwin
 Version: 5.21.4
-Release: 3
+Release: 4
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -37,6 +37,10 @@ Source1000: %{name}.rpmlintrc
 Patch2: kwin-5.10.5-aarch64-compile.patch
 Patch3: kwin-5.21.0-fix-cmake-deps.patch
 Patch4: https://invent.kde.org/plasma/kwin/-/merge_requests/751.patch
+%ifarch %{armx}
+# (tpg) this patch add supports for Panfrost Mali driver just to adjust supported effects
+Patch100: kwin-5.21.4-add-support-for-panfrost-driver.patch
+%endif
 Summary: The KWin window manager
 URL: http://kde.org/
 License: GPL
@@ -59,7 +63,6 @@ BuildRequires: pkgconfig(Qt5Quick)
 BuildRequires: pkgconfig(Qt5QuickWidgets)
 BuildRequires: pkgconfig(Qt5Script)
 BuildRequires: pkgconfig(Qt5Sensors)
-BuildRequires: pkgconfig(Qt5Test)
 BuildRequires: pkgconfig(Qt5UiTools)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5X11Extras)
@@ -123,6 +126,7 @@ BuildRequires: x11-server-xwayland
 BuildRequires: qt5-qtvirtualkeyboard
 BuildRequires: qt5-qtwayland
 BuildRequires: qt5-qtquickcontrols
+BuildRequires: hwdata
 #BuildRequires: libhybris
 BuildRequires: %mklibname -d -s qt5eventdispatchersupport
 BuildRequires: %mklibname -d -s qt5fontdatabasesupport
