@@ -1,4 +1,3 @@
-%define debug_package %{nil}
 
 %define effectmajor 1
 %define effectname %mklibname kwin4_effect_builtins %{effectmajor}
@@ -27,16 +26,14 @@
 %global optflags %{optflags} -O3
 
 Name: kwin
-Version: 5.21.5
+Version: 5.22.0
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
-Patch2: kwin-5.10.5-aarch64-compile.patch
 Patch3: kwin-5.21.0-fix-cmake-deps.patch
-Patch4: https://invent.kde.org/plasma/kwin/-/merge_requests/751.patch
 # (tpg) this patch add supports for Panfrost Mali driver just to adjust supported effects
 # (bero) extended the patch to do the same for Lima, VC4 and VC3D
 Patch100: kwin-5.21.4-add-support-for-panfrost-driver.patch
@@ -295,6 +292,8 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/kconf_update/kwin-5.21-desktop-grid-click-behavior.py
 %{_datadir}/kconf_update/kwin-5.21-no-swap-encourage.py
 %{_datadir}/krunner/dbusplugins/kwin-runner-windows.desktop
+%{_libdir}/qt5/plugins/kcms/kcm_virtualkeyboard.so
+%{_datadir}/kpackage/kcms/kcm_virtualkeyboard
 
 %files x11
 %{_bindir}/kwin_x11

@@ -1,40 +1,36 @@
-diff -up kwin-5.21.4/effects/backgroundcontrast/contrast.cpp.4~ kwin-5.21.4/effects/backgroundcontrast/contrast.cpp
---- kwin-5.21.4/effects/backgroundcontrast/contrast.cpp.4~	2021-04-06 14:27:01.000000000 +0200
-+++ kwin-5.21.4/effects/backgroundcontrast/contrast.cpp	2021-04-26 03:20:25.176991015 +0200
-@@ -256,6 +256,9 @@ bool ContrastEffect::enabledByDefault()
- 
-     if (gl->isIntel() && gl->chipClass() < SandyBridge)
+diff -up kwin-5.22.0/src/effects/backgroundcontrast/contrast.cpp.2~ kwin-5.22.0/src/effects/backgroundcontrast/contrast.cpp
+--- kwin-5.22.0/src/effects/backgroundcontrast/contrast.cpp.2~	2021-06-03 23:37:39.175919500 +0200
++++ kwin-5.22.0/src/effects/backgroundcontrast/contrast.cpp	2021-06-03 23:38:57.000136057 +0200
+@@ -256,6 +256,8 @@ bool ContrastEffect::enabledByDefault()
          return false;
-+    // As of Linux 5.12, Mesa 21.1, the effect works, but is very slow (< 5 FPS) on these GPUs
-+    if (gl->isLima() || (gl->isPanfrost() && gl->chipClass() <= MaliT8XX) || gl->isVideoCore4() || gl->isVideoCore3D())
+     if (gl->isPanfrost() && gl->chipClass() <= MaliT8XX)
+         return false;
++    if (gl->isLima() || gl->isVideoCore4() || gl->isVideoCore3D())
 +        return false;
      if (gl->isSoftwareEmulation()) {
          return false;
      }
-diff -up kwin-5.21.4/effects/blur/blur.cpp.4~ kwin-5.21.4/effects/blur/blur.cpp
---- kwin-5.21.4/effects/blur/blur.cpp.4~	2021-04-06 14:27:01.000000000 +0200
-+++ kwin-5.21.4/effects/blur/blur.cpp	2021-04-26 03:17:49.371832827 +0200
-@@ -356,6 +356,16 @@ bool BlurEffect::enabledByDefault()
- 
-     if (gl->isIntel() && gl->chipClass() < SandyBridge)
+diff -up kwin-5.22.0/src/effects/blur/blur.cpp.2~ kwin-5.22.0/src/effects/blur/blur.cpp
+--- kwin-5.22.0/src/effects/blur/blur.cpp.2~	2021-06-03 23:37:39.176919515 +0200
++++ kwin-5.22.0/src/effects/blur/blur.cpp	2021-06-03 23:39:40.066808090 +0200
+@@ -357,6 +357,13 @@ bool BlurEffect::enabledByDefault()
+     if (gl->isPanfrost() && gl->chipClass() <= MaliT8XX) {
          return false;
-+
+     }
 +    // As of Linux 5.12, Mesa 21.1, the blur effect works
 +    // but is painfully slow (FPS < 5) on Mali and VideoCore
 +    if ( gl->isLima() ||
-+        (gl->isPanfrost() && gl->chipClass() <= MaliT8XX) ||
 +         gl->isVideoCore4() ||
 +         gl->isVideoCore3D()) {
 +        return false;
 +    }
-+
      if (gl->isSoftwareEmulation()) {
          return false;
      }
-diff -up kwin-5.21.4/libkwineffects/kwinglplatform.cpp.4~ kwin-5.21.4/libkwineffects/kwinglplatform.cpp
---- kwin-5.21.4/libkwineffects/kwinglplatform.cpp.4~	2021-04-06 14:27:01.000000000 +0200
-+++ kwin-5.21.4/libkwineffects/kwinglplatform.cpp	2021-04-26 03:19:20.705096243 +0200
-@@ -446,23 +446,69 @@ static ChipClass detectQualcommClass(con
+diff -up kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp.2~ kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp
+--- kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp.2~	2021-06-03 16:07:47.000000000 +0200
++++ kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp	2021-06-03 23:45:05.287862304 +0200
+@@ -482,17 +482,13 @@ static ChipClass detectQualcommClass(con
      if (ok) {
          if (value >= 100 && value < 200) {
              return Adreno1XX;
@@ -56,7 +52,8 @@ diff -up kwin-5.21.4/libkwineffects/kwinglplatform.cpp.4~ kwin-5.21.4/libkwineff
              return Adreno5XX;
          }
      }
-     return UnknownAdreno;
+@@ -518,6 +514,37 @@ static ChipClass detectPanfrostClass(con
+     return UnknownPanfrost;
  }
  
 +static ChipClass detectLimaClass(const QByteArray &chipClass)
@@ -70,25 +67,6 @@ diff -up kwin-5.21.4/libkwineffects/kwinglplatform.cpp.4~ kwin-5.21.4/libkwineff
 +        return Mali470;
 +
 +    return UnknownLima;
-+}
-+
-+static ChipClass detectPanfrostClass(const QByteArray &chipClass)
-+{
-+
-+    if (chipClass.contains("T720")   ||
-+           chipClass.contains("T760"))
-+        return MaliT7XX;
-+
-+    if (chipClass.contains("T820")   ||
-+           chipClass.contains("T860"))
-+        return MaliT8XX;
-+
-+    if (chipClass.contains("G31")   ||
-+           chipClass.contains("G52") ||
-+           chipClass.contains("G72"))
-+        return MaliGXX;
-+
-+    return UnknownPanfrost;
 +}
 +
 +static ChipClass detectVC4Class(const QByteArray &chipClass)
@@ -112,47 +90,31 @@ diff -up kwin-5.21.4/libkwineffects/kwinglplatform.cpp.4~ kwin-5.21.4/libkwineff
  QString GLPlatform::versionToString(qint64 version)
  {
      return QString::fromLatin1(versionToString8(version));
-@@ -523,6 +569,14 @@ QByteArray GLPlatform::driverToString8(D
-         return QByteArrayLiteral("Qualcomm");
-     case Driver_Virgl:
+@@ -580,7 +607,12 @@ QByteArray GLPlatform::driverToString8(D
          return QByteArrayLiteral("Virgl (virtio-gpu, Qemu/KVM guest)");
+     case Driver_Panfrost:
+         return QByteArrayLiteral("Panfrost");
+-
 +    case Driver_Lima:
 +        return QByteArrayLiteral("Mali (Lima)");
-+    case Driver_Panfrost:
-+        return QByteArrayLiteral("Mali (Panfrost)");
 +    case Driver_VC4:
 +        return QByteArrayLiteral("VideoCore IV");
 +    case Driver_V3D:
 +        return QByteArrayLiteral("VideoCore 3D");
- 
      default:
          return QByteArrayLiteral("Unknown");
-@@ -604,6 +658,13 @@ QByteArray GLPlatform::chipClassToString
-     case Adreno5XX:
-         return QByteArrayLiteral("Adreno 5xx series");
- 
-+    case MaliT7XX:
-+        return QByteArrayLiteral("Mali T7xx series");
-+    case MaliT8XX:
-+        return QByteArrayLiteral("Mali T8xx series");
-+    case MaliGXX:
-+        return QByteArrayLiteral("Mali Gxx series");
+     }
+@@ -880,7 +912,23 @@ void GLPlatform::detect(OpenGLPlatformIn
+     else if (m_renderer.contains("Panfrost")) {
+         m_driver = Driver_Panfrost;
+         m_chipClass = detectPanfrostClass(m_renderer);
+-     }
++    }
 +
-     default:
-         return QByteArrayLiteral("Unknown");
-     }
-@@ -787,6 +848,26 @@ void GLPlatform::detect(OpenGLPlatformIn
-         m_chipClass = detectQualcommClass(m_renderer);
-     }
- 
++
 +    else if (m_renderer.contains("Mali")) {
 +        m_driver = Driver_Lima;
 +        m_chipClass = detectLimaClass(m_renderer);
-+    }
-+
-+    else if (m_renderer.contains("Panfrost")) {
-+        m_driver = Driver_Panfrost;
-+        m_chipClass = detectPanfrostClass(m_renderer);
 +    }
 +
 +    else if (m_renderer.startsWith("VC4 ")) {
@@ -164,11 +126,10 @@ diff -up kwin-5.21.4/libkwineffects/kwinglplatform.cpp.4~ kwin-5.21.4/libkwineff
 +        m_driver = Driver_V3D;
 +	m_chipClass = detectV3DClass(m_renderer);
 +    }
-+
+ 
      else if (m_renderer == "Software Rasterizer") {
          m_driver = Driver_Swrast;
-     }
-@@ -912,6 +993,7 @@ void GLPlatform::detect(OpenGLPlatformIn
+@@ -1007,6 +1055,7 @@ void GLPlatform::detect(OpenGLPlatformIn
          else if (m_renderer == "virgl") {
              m_driver = Driver_Virgl;
          }
@@ -176,23 +137,20 @@ diff -up kwin-5.21.4/libkwineffects/kwinglplatform.cpp.4~ kwin-5.21.4/libkwineff
      }
  
      // Driver/GPU specific features
-@@ -984,6 +1066,31 @@ void GLPlatform::detect(OpenGLPlatformIn
-         }
-     }
+@@ -1081,6 +1130,26 @@ void GLPlatform::detect(OpenGLPlatformIn
  
-+    if (isLima()) {
-+        m_recommendedCompositor = OpenGL2Compositing;
-+        // As of Linux 5.12, Mesa 21.1, GLSL works but causes dramatic FPS drop on this GPU
-+        m_supportsGLSL = false;
-+    }
-+
-+    if (isPanfrost()) {
-+        m_recommendedCompositor = OpenGL2Compositing;
-+
+     if (isPanfrost()) {
+         m_recommendedCompositor = OpenGL2Compositing;
 +        if (m_chipClass <= MaliT8XX) {
 +            // As of Linux 5.12, Mesa 21.1, GLSL works but causes dramatic FPS drop on this GPU
 +            m_supportsGLSL = false;
 +        }
++    }
++
++    if (isLima()) {
++        m_recommendedCompositor = OpenGL2Compositing;
++        // As of Linux 5.12, Mesa 21.1, GLSL works but causes dramatic FPS drop on this GPU
++        m_supportsGLSL = false;
 +    }
 +
 +    if (isVideoCore4()) {
@@ -203,23 +161,16 @@ diff -up kwin-5.21.4/libkwineffects/kwinglplatform.cpp.4~ kwin-5.21.4/libkwineff
 +    if (isVideoCore3D()) {
 +        // As of Linux 5.12, Mesa 21.1, OpenGL works, but is much slower than XRender
 +        m_recommendedCompositor = XRenderCompositing;
-+    }
-+
+     }
+ 
      if (isMesaDriver() && platformInterface == EglPlatformInterface) {
-         // According to the reference implementation in
-         // mesa/demos/src/egl/opengles1/texture_from_pixmap
-@@ -1204,6 +1311,26 @@ bool GLPlatform::isAdreno() const
-     return m_chipClass >= Adreno1XX && m_chipClass <= UnknownAdreno;
+@@ -1308,6 +1377,21 @@ bool GLPlatform::isPanfrost() const
+     return m_chipClass >= MaliT7XX && m_chipClass <= UnknownPanfrost;
  }
  
 +bool GLPlatform::isLima() const
 +{
 +    return m_chipClass >= Mali400 && m_chipClass <= UnknownLima;
-+}
-+
-+bool GLPlatform::isPanfrost() const
-+{
-+    return m_chipClass >= MaliT7XX && m_chipClass <= UnknownPanfrost;
 +}
 +
 +bool GLPlatform::isVideoCore4() const
@@ -235,37 +186,29 @@ diff -up kwin-5.21.4/libkwineffects/kwinglplatform.cpp.4~ kwin-5.21.4/libkwineff
  const QByteArray &GLPlatform::glRendererString() const
  {
      return m_renderer;
-diff -up kwin-5.21.4/libkwineffects/kwinglplatform.h.4~ kwin-5.21.4/libkwineffects/kwinglplatform.h
---- kwin-5.21.4/libkwineffects/kwinglplatform.h.4~	2021-04-06 14:27:01.000000000 +0200
-+++ kwin-5.21.4/libkwineffects/kwinglplatform.h	2021-04-26 03:15:40.025053611 +0200
-@@ -93,6 +93,10 @@ enum Driver {
-     Driver_Qualcomm,
+diff -up kwin-5.22.0/src/libkwineffects/kwinglplatform.h.2~ kwin-5.22.0/src/libkwineffects/kwinglplatform.h
+--- kwin-5.22.0/src/libkwineffects/kwinglplatform.h.2~	2021-06-03 23:37:39.176919515 +0200
++++ kwin-5.22.0/src/libkwineffects/kwinglplatform.h	2021-06-03 23:47:21.464926843 +0200
+@@ -94,6 +94,9 @@ enum Driver {
      Driver_RadeonSI,
      Driver_Virgl,
+     Driver_Panfrost,
 +    Driver_Lima,
-+    Driver_Panfrost,
 +    Driver_VC4,
 +    Driver_V3D,
-     Driver_Unknown
+     Driver_Unknown,
  };
  
-@@ -142,6 +146,28 @@ enum ChipClass {
-     Adreno5XX,              // GLES3.1 CL2.0 DX11.2
-     UnknownAdreno = 3999,
+@@ -164,6 +167,21 @@ enum ChipClass {
+     MaliGXX,                // GLES3.0
+     UnknownPanfrost = 4999,
  
 +    // Lima Mali
 +    // from https://docs.mesa3d.org/drivers/lima.html
-+    Mali400       = 4000,
++    Mali400       = 5000,
 +    Mali450,
 +    Mali470,
-+    UnknownLima = 4999,
-+
-+    // Panfrost Mali
-+    // from https://docs.mesa3d.org/drivers/panfrost.html
-+    MaliT7XX      = 5000,   // GLES2.0
-+    MaliT8XX,               // GLES3.0
-+    MaliGXX,                // GLES3.0
-+    UnknownPanfrost = 5999,
++    UnknownLima = 5999,
 +
 +    // Broadcom VideoCore IV (e.g. Raspberry Pi 0 to 3), GLES 2.0/2.1 with caveats
 +    VC4_2_1       = 6000, // Found in Raspberry Pi 3B+
@@ -275,37 +218,31 @@ diff -up kwin-5.21.4/libkwineffects/kwinglplatform.h.4~ kwin-5.21.4/libkwineffec
 +    V3D_4_2       = 7000, // Found in Raspberry Pi 400
 +    UnknownVideoCore3D = 7999,
 +
-     UnknownChipClass = 99999
+     UnknownChipClass = 99999,
  };
+ // clang-format on
+@@ -315,6 +333,24 @@ public:
+      **/
+     bool isPanfrost() const;
  
-@@ -287,6 +313,30 @@ public:
-     bool isVirgl() const;
- 
-     /**
++     /**
 +     * @returns @c true if the GPU is a Mali GPU supported by the Lima driver (Mali 400, 450)
-+     * @since 5.22
++     * @since 5.22.1
 +     **/
 +    bool isLima() const;
 +
 +    /**
-+     * @returns @c true if the GPU is a Mali GPU supported by the Panfrost driver (Mali T7xx, T8xx, Gxx)
-+     * @since 5.22
-+     **/
-+    bool isPanfrost() const;
-+
-+    /**
 +     * @returns @c true if the GPU is a Broadcom VideoCore IV (e.g. Raspberry Pi 0 to 3)
-+     * @since 5.22
++     * @since 5.22.1
 +     **/
 +    bool isVideoCore4() const;
 +
 +    /**
 +     * @returns @c true if the GPU is a Broadcom VideoCore 3D (e.g. Raspberry Pi 4, 400)
-+     * @since 5.22
++     * @since 5.22.1
 +     **/
 +    bool isVideoCore3D() const;
 +
-+    /**
+     /**
       * @returns the GL_VERSION string as provided by the driver.
       * @since 4.9
-      */
