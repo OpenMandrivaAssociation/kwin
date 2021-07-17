@@ -25,9 +25,13 @@
 # (tpg) optimize it a bit
 %global optflags %{optflags} -O3
 
+Summary: The KWin window manager
 Name: kwin
 Version: 5.22.3
-Release: 1
+Release: 2
+URL: http://kde.org/
+License: GPL
+Group: System/Libraries
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
@@ -37,10 +41,9 @@ Patch3: kwin-5.21.0-fix-cmake-deps.patch
 # (tpg) this patch add supports for Panfrost Mali driver just to adjust supported effects
 # (bero) extended the patch to do the same for Lima, VC4 and VC3D
 Patch100: kwin-5.21.4-add-support-for-panfrost-driver.patch
-Summary: The KWin window manager
-URL: http://kde.org/
-License: GPL
-Group: System/Libraries
+# (tpg) https://bugs.kde.org/show_bug.cgi?id=438789
+Patch101: https://invent.kde.org/plasma/kwin/-/merge_requests/1164.patch
+
 BuildRequires: qt5-qtmultimedia
 # Some of the cmake(*) stuff below is provided by both kdelibs4-devel and
 # libKF5KDELibs4Support-devel - let's make sure we pick the right one
