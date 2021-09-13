@@ -37,6 +37,7 @@ Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
+Patch2: kwin-5.22.5-compile.patch
 Patch3: kwin-5.21.0-fix-cmake-deps.patch
 # (tpg) this patch add supports for Panfrost Mali driver just to adjust supported effects
 # (bero) extended the patch to do the same for Lima, VC4 and VC3D

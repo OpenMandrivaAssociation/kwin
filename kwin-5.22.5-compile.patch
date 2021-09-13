@@ -1,0 +1,12 @@
+diff -up kwin-5.22.5/src/plugins/platforms/x11/common/eglonxbackend.cpp.omv~ kwin-5.22.5/src/plugins/platforms/x11/common/eglonxbackend.cpp
+--- kwin-5.22.5/src/plugins/platforms/x11/common/eglonxbackend.cpp.omv~	2021-09-13 23:37:25.509607861 +0200
++++ kwin-5.22.5/src/plugins/platforms/x11/common/eglonxbackend.cpp	2021-09-13 23:37:54.269719796 +0200
+@@ -224,7 +224,7 @@ EGLSurface EglOnXBackend::createSurface(
+         //       cannot be an xcb_window_t.
+         surface = eglCreatePlatformWindowSurfaceEXT(eglDisplay(), config(), (void *) &window, nullptr);
+     } else {
+-        surface = eglCreateWindowSurface(eglDisplay(), config(), window, nullptr);
++        surface = eglCreateWindowSurface(eglDisplay(), config(), (void *) &window, nullptr);
+     }
+ 
+     return surface;
