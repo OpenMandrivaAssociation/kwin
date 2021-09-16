@@ -27,7 +27,7 @@
 
 Summary: The KWin window manager
 Name: kwin
-Version: 5.22.5
+Version: 5.22.90
 Release: 1
 URL: http://kde.org/
 License: GPL
@@ -37,7 +37,6 @@ Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
-Patch2: kwin-5.22.5-compile.patch
 Patch3: kwin-5.21.0-fix-cmake-deps.patch
 # (tpg) this patch add supports for Panfrost Mali driver just to adjust supported effects
 # (bero) extended the patch to do the same for Lima, VC4 and VC3D
@@ -261,8 +260,9 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 
 %files -f %{name}.lang
 %{_datadir}/config.kcfg/*
-%{_datadir}/kconf_update/kwin.upd
-%{_datadir}/kconf_update/kwin-5.18-move-animspeed.py
+%{_datadir}/kconf_update/*.upd
+%{_datadir}/kconf_update/*.py
+%{_datadir}/kconf_update/*.sh
 %{_datadir}/kwin
 %{_datadir}/kservices5/*
 %{_datadir}/kservicetypes5/*
@@ -302,7 +302,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %files x11
 %{_bindir}/kwin_x11
 %{_libdir}/qt5/plugins/org.kde.kwin.platforms/KWinX11Platform.so
-%{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneXRender.so
 %{_prefix}/lib/systemd/user/plasma-kwin_x11.service
 
 %files wayland

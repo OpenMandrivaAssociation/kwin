@@ -1,7 +1,7 @@
-diff -up kwin-5.22.0/src/effects/backgroundcontrast/contrast.cpp.2~ kwin-5.22.0/src/effects/backgroundcontrast/contrast.cpp
---- kwin-5.22.0/src/effects/backgroundcontrast/contrast.cpp.2~	2021-06-03 23:37:39.175919500 +0200
-+++ kwin-5.22.0/src/effects/backgroundcontrast/contrast.cpp	2021-06-03 23:38:57.000136057 +0200
-@@ -256,6 +256,8 @@ bool ContrastEffect::enabledByDefault()
+diff -up kwin-5.22.90/src/effects/backgroundcontrast/contrast.cpp.2~ kwin-5.22.90/src/effects/backgroundcontrast/contrast.cpp
+--- kwin-5.22.90/src/effects/backgroundcontrast/contrast.cpp.2~	2021-09-16 10:41:27.000000000 +0200
++++ kwin-5.22.90/src/effects/backgroundcontrast/contrast.cpp	2021-09-16 18:51:38.337699199 +0200
+@@ -263,6 +263,8 @@ bool ContrastEffect::enabledByDefault()
          return false;
      if (gl->isPanfrost() && gl->chipClass() <= MaliT8XX)
          return false;
@@ -10,10 +10,10 @@ diff -up kwin-5.22.0/src/effects/backgroundcontrast/contrast.cpp.2~ kwin-5.22.0/
      if (gl->isSoftwareEmulation()) {
          return false;
      }
-diff -up kwin-5.22.0/src/effects/blur/blur.cpp.2~ kwin-5.22.0/src/effects/blur/blur.cpp
---- kwin-5.22.0/src/effects/blur/blur.cpp.2~	2021-06-03 23:37:39.176919515 +0200
-+++ kwin-5.22.0/src/effects/blur/blur.cpp	2021-06-03 23:39:40.066808090 +0200
-@@ -357,6 +357,13 @@ bool BlurEffect::enabledByDefault()
+diff -up kwin-5.22.90/src/effects/blur/blur.cpp.2~ kwin-5.22.90/src/effects/blur/blur.cpp
+--- kwin-5.22.90/src/effects/blur/blur.cpp.2~	2021-09-16 10:41:27.000000000 +0200
++++ kwin-5.22.90/src/effects/blur/blur.cpp	2021-09-16 18:51:38.337699199 +0200
+@@ -360,6 +360,13 @@ bool BlurEffect::enabledByDefault()
      if (gl->isPanfrost() && gl->chipClass() <= MaliT8XX) {
          return false;
      }
@@ -27,9 +27,9 @@ diff -up kwin-5.22.0/src/effects/blur/blur.cpp.2~ kwin-5.22.0/src/effects/blur/b
      if (gl->isSoftwareEmulation()) {
          return false;
      }
-diff -up kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp.2~ kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp
---- kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp.2~	2021-06-03 16:07:47.000000000 +0200
-+++ kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp	2021-06-03 23:45:05.287862304 +0200
+diff -up kwin-5.22.90/src/libkwineffects/kwinglplatform.cpp.2~ kwin-5.22.90/src/libkwineffects/kwinglplatform.cpp
+--- kwin-5.22.90/src/libkwineffects/kwinglplatform.cpp.2~	2021-09-16 10:41:27.000000000 +0200
++++ kwin-5.22.90/src/libkwineffects/kwinglplatform.cpp	2021-09-16 18:55:08.953288482 +0200
 @@ -482,17 +482,13 @@ static ChipClass detectQualcommClass(con
      if (ok) {
          if (value >= 100 && value < 200) {
@@ -140,7 +140,7 @@ diff -up kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp.2~ kwin-5.22.0/src/li
 @@ -1081,6 +1130,26 @@ void GLPlatform::detect(OpenGLPlatformIn
  
      if (isPanfrost()) {
-         m_recommendedCompositor = OpenGL2Compositing;
+         m_recommendedCompositor = OpenGLCompositing;
 +        if (m_chipClass <= MaliT8XX) {
 +            // As of Linux 5.12, Mesa 21.1, GLSL works but causes dramatic FPS drop on this GPU
 +            m_supportsGLSL = false;
@@ -148,19 +148,19 @@ diff -up kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp.2~ kwin-5.22.0/src/li
 +    }
 +
 +    if (isLima()) {
-+        m_recommendedCompositor = OpenGL2Compositing;
++        m_recommendedCompositor = OpenGLCompositing;
 +        // As of Linux 5.12, Mesa 21.1, GLSL works but causes dramatic FPS drop on this GPU
 +        m_supportsGLSL = false;
 +    }
 +
 +    if (isVideoCore4()) {
-+        // As of Linux 5.12, Mesa 21.1, OpenGL works, but is much slower than XRender
-+        m_recommendedCompositor = XRenderCompositing;
++        // As of Linux 5.12, Mesa 21.1, OpenGL works, but is much slower than QPainter
++        m_recommendedCompositor = QPainterCompositing;
 +    }
 +
 +    if (isVideoCore3D()) {
-+        // As of Linux 5.12, Mesa 21.1, OpenGL works, but is much slower than XRender
-+        m_recommendedCompositor = XRenderCompositing;
++        // As of Linux 5.12, Mesa 21.1, OpenGL works, but is much slower than QPainter
++        m_recommendedCompositor = QPainterCompositing;
      }
  
      if (isMesaDriver() && platformInterface == EglPlatformInterface) {
@@ -186,9 +186,9 @@ diff -up kwin-5.22.0/src/libkwineffects/kwinglplatform.cpp.2~ kwin-5.22.0/src/li
  const QByteArray &GLPlatform::glRendererString() const
  {
      return m_renderer;
-diff -up kwin-5.22.0/src/libkwineffects/kwinglplatform.h.2~ kwin-5.22.0/src/libkwineffects/kwinglplatform.h
---- kwin-5.22.0/src/libkwineffects/kwinglplatform.h.2~	2021-06-03 23:37:39.176919515 +0200
-+++ kwin-5.22.0/src/libkwineffects/kwinglplatform.h	2021-06-03 23:47:21.464926843 +0200
+diff -up kwin-5.22.90/src/libkwineffects/kwinglplatform.h.2~ kwin-5.22.90/src/libkwineffects/kwinglplatform.h
+--- kwin-5.22.90/src/libkwineffects/kwinglplatform.h.2~	2021-09-16 10:41:27.000000000 +0200
++++ kwin-5.22.90/src/libkwineffects/kwinglplatform.h	2021-09-16 18:51:38.337699199 +0200
 @@ -94,6 +94,9 @@ enum Driver {
      Driver_RadeonSI,
      Driver_Virgl,
