@@ -163,7 +163,6 @@ Requires: x11-server-xwayland
 Requires: kwindowsystem-wayland
 Requires: kwayland-server
 Requires: libkscreen-wayland
-Requires(post): libcap-utils
 Group: System/Libraries
 
 %description wayland
@@ -255,9 +254,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 
 %find_lang %{name} --all-name --with-html --with-man
 
-%post wayland
-%{_sbindir}/setcap "CAP_SYS_RESOURCE=+ep" %{_bindir}/kwin_wayland
-
 %files -f %{name}.lang
 %{_datadir}/config.kcfg/*
 %{_datadir}/kconf_update/*.upd
@@ -305,7 +301,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_prefix}/lib/systemd/user/plasma-kwin_x11.service
 
 %files wayland
-%{_bindir}/kwin_wayland
+%caps(cap_sys_resource+ep) %{_bindir}/kwin_wayland
 %{_bindir}/kwin_wayland_wrapper
 %{_libdir}/qt5/plugins/org.kde.kwin.waylandbackends
 
