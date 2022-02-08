@@ -1,8 +1,3 @@
-
-%define effectmajor 1
-%define effectname %mklibname kwin4_effect_builtins %{effectmajor}
-%define effectdname %mklibname kwin4_effect_builtins -d
-
 %define effectsmajor 13
 %define effectsname %mklibname keffects %{effectsmajor}
 %define effectsdname %mklibname keffects -d
@@ -27,8 +22,8 @@
 
 Summary: The KWin window manager
 Name: kwin
-Version: 5.23.5
-Release: 2
+Version: 5.24.0
+Release: 1
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
@@ -137,6 +132,10 @@ Requires: qt5-qtquickcontrols
 Requires: plasma-framework
 #(tpg) this is needed for kcm_kwin_effects
 Requires: glib-networking
+# Obsolete packages that used to be split out solely for old policy reasons
+%define effectmajor 1
+%define effectname %mklibname kwin4_effect_builtins 1
+Obsoletes: %{effectname} < %{EVRD}
 
 %description
 The KWin window manager.
@@ -167,18 +166,6 @@ Group: System/Libraries
 
 %description wayland
 Wayland Window System support for KWin.
-
-%package -n %{effectname}
-Summary: KWin effect library
-Group: System/Libraries
-Requires: %{name} = %{EVRD}
-Obsoletes: %{mklibname keffects 7} < 5.6.0
-Obsoletes: %{mklibname keffects 8} < 5.8.2
-Obsoletes: %{mklibname keffects 11} < 5.14.90
-Obsoletes: %{mklibname keffects 12} < 5.20.90
-
-%description -n %{effectname}
-KWin effect library.
 
 %package -n %{effectsname}
 Summary: KWin effects library
@@ -224,11 +211,9 @@ KWin KCM library.
 %package devel
 Summary: Development files for the KDE Frameworks 5 Win library
 Group: Development/KDE and Qt
-Requires: %{effectname} = %{EVRD}
 Requires: %{effectsname} = %{EVRD}
 Requires: %{glutilsname} = %{EVRD}
 Requires: %{xrenderutilsname} = %{EVRD}
-Provides: %{effectdname} = %{EVRD}
 Provides: %{effectsdname} = %{EVRD}
 Provides: %{glutilsdname} = %{EVRD}
 Provides: %{xrenderutilsdname} = %{EVRD}
@@ -273,9 +258,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/qt5/plugins/org.kde.kdecoration2
 %{_libdir}/qt5/plugins/kpackage/*
 %dir %{_libdir}/qt5/plugins/org.kde.kwin.platforms
-%dir %{_libdir}/qt5/plugins/org.kde.kwin.scenes
-%{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneQPainter.so
-%{_libdir}/qt5/plugins/org.kde.kwin.scenes/KWinSceneOpenGL.so
 %{_libdir}/qt5/plugins/kcms/kcm_kwin_virtualdesktops.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
@@ -294,6 +276,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/krunner/dbusplugins/kwin-runner-windows.desktop
 %{_libdir}/qt5/plugins/kcms/kcm_virtualkeyboard.so
 %{_datadir}/kpackage/kcms/kcm_virtualkeyboard
+%{_datadir}/applications/org.kde.kwin_rules_dialog.desktop
 
 %files x11
 %{_bindir}/kwin_x11
@@ -304,9 +287,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %caps(cap_sys_resource+ep) %{_bindir}/kwin_wayland
 %{_bindir}/kwin_wayland_wrapper
 %{_libdir}/qt5/plugins/org.kde.kwin.waylandbackends
-
-%files -n %{effectname}
-%{_libdir}/libkwin4_effect_builtins.so.%{effectmajor}*
+%{_prefix}/lib/systemd/user/plasma-kwin_wayland.service
 
 %files -n %{effectsname}
 %{_libdir}/libkwineffects.so.%{effectsmajor}
@@ -326,7 +307,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 
 %files devel
 %{_includedir}/*
-%{_libdir}/libkwin4_effect_builtins.so
 %{_libdir}/libkwineffects.so
 %{_libdir}/libkwingl*utils.so
 %{_libdir}/libkwinxrenderutils.so
