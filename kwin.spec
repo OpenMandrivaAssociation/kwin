@@ -15,7 +15,7 @@
 
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
-%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
+%define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 
 # (tpg) optimize it a bit
 %global optflags %{optflags} -O3
@@ -113,6 +113,7 @@ BuildRequires: cmake(KWaylandServer)
 BuildRequires: cmake(QAccessibilityClient)
 BuildRequires: cmake(KF5Runner)
 BuildRequires: cmake(Qt5XkbCommonSupport)
+BuildRequires: cmake(Qt5ServiceSupport)
 BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(lcms2)
 BuildRequires: pkgconfig(libpipewire-0.3)
