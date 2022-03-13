@@ -23,7 +23,7 @@
 Summary: The KWin window manager
 Name: kwin
 Version: 5.24.2
-Release: 1
+Release: 2
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
@@ -137,6 +137,9 @@ Requires: glib-networking
 %define effectmajor 1
 %define effectname %mklibname kwin4_effect_builtins 1
 Obsoletes: %{effectname} < %{EVRD}
+%if %omvver >= 4050000
+Requires: %{name}-wayland
+%endif
 
 %description
 The KWin window manager.
@@ -159,7 +162,7 @@ Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
 Requires: kwayland-integration
 Requires: %{_lib}qt5-output-driver-default
-Requires: x11-server-xwayland
+Requires: xwayland
 Requires: kwindowsystem-wayland
 Requires: kwayland-server
 Requires: libkscreen-wayland
@@ -243,6 +246,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %files -f %{name}.lang
 %{_datadir}/config.kcfg/*
 %{_datadir}/kconf_update/*.upd
+%{_datadir}/kconf_update/*.pl
 %{_datadir}/kconf_update/*.py
 %{_datadir}/kconf_update/*.sh
 %{_datadir}/kwin
@@ -263,8 +267,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_datadir}/qlogging-categories5/*
-%{_datadir}/kconf_update/kwin-5.16-auto-bordersize.sh
-%{_datadir}/kconf_update/kwinrules*
 %{_libdir}/qt5/plugins/kcms/kcm_kwin_effects.so
 %{_libdir}/qt5/plugins/kcms/kcm_kwindecoration.so
 %{_datadir}/knsrcfiles/*.knsrc
@@ -272,8 +274,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/kpackage/kcms/kcm_kwindecoration
 %{_libdir}/qt5/plugins/kcms/kcm_kwinrules.so
 %{_datadir}/kpackage/kcms/kcm_kwinrules
-%{_datadir}/kconf_update/kwin-5.21-desktop-grid-click-behavior.py
-%{_datadir}/kconf_update/kwin-5.21-no-swap-encourage.py
 %{_datadir}/krunner/dbusplugins/kwin-runner-windows.desktop
 %{_libdir}/qt5/plugins/kcms/kcm_virtualkeyboard.so
 %{_datadir}/kpackage/kcms/kcm_virtualkeyboard
