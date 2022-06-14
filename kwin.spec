@@ -22,8 +22,8 @@
 
 Summary: The KWin window manager
 Name: kwin
-Version: 5.24.5
-Release: 2
+Version: 5.25.0
+Release: 1
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
@@ -32,7 +32,6 @@ Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
-Patch3: kwin-5.21.0-fix-cmake-deps.patch
 # (tpg) this patch add supports for Panfrost Mali driver just to adjust supported effects
 # (bero) extended the patch to do the same for Lima, VC4 and VC3D
 Patch100: kwin-5.21.4-add-support-for-panfrost-driver.patch
@@ -61,6 +60,7 @@ BuildRequires: pkgconfig(Qt5X11Extras)
 BuildRequires: pkgconfig(freetype2)
 BuildRequires: pkgconfig(fontconfig)
 BuildRequires: pkgconfig(libinput)
+BuildRequires: pkgconfig(libxcvt)
 BuildRequires: pkgconfig(gbm)
 BuildRequires: pkgconfig(udev)
 BuildRequires: pkgconfig(libdrm)
@@ -258,26 +258,42 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/dbus-1/*/*
 %{_libdir}/qt5/qml/org/kde/kwin
 %{_libdir}/qt5/plugins/kwin
-%{_libdir}/qt5/plugins/kwincompositing.so
-%{_libdir}/qt5/plugins/kcm_kwin*
 %{_libdir}/qt5/plugins/org.kde.kdecoration2
 %{_libdir}/qt5/plugins/kpackage/*
 %dir %{_libdir}/qt5/plugins/org.kde.kwin.platforms
-%{_libdir}/qt5/plugins/kcms/kcm_kwin_virtualdesktops.so
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_datadir}/qlogging-categories5/*
-%{_libdir}/qt5/plugins/kcms/kcm_kwin_effects.so
-%{_libdir}/qt5/plugins/kcms/kcm_kwindecoration.so
 %{_datadir}/knsrcfiles/*.knsrc
 %{_datadir}/kpackage/kcms/kcm_kwin_effects
 %{_datadir}/kpackage/kcms/kcm_kwindecoration
-%{_libdir}/qt5/plugins/kcms/kcm_kwinrules.so
 %{_datadir}/kpackage/kcms/kcm_kwinrules
 %{_datadir}/krunner/dbusplugins/kwin-runner-windows.desktop
-%{_libdir}/qt5/plugins/kcms/kcm_virtualkeyboard.so
 %{_datadir}/kpackage/kcms/kcm_virtualkeyboard
 %{_datadir}/applications/org.kde.kwin_rules_dialog.desktop
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_kwin_effects.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_kwin_scripts.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_kwin_virtualdesktops.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_kwindecoration.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_kwinrules.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_virtualkeyboard.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwinoptions.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwinscreenedges.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwintabbox.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwintouchscreen.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kwincompositing.so
+%{_libdir}/qt5/qml/org/kde/kwin.2
+%{_datadir}/applications/kcm_kwin_effects.desktop
+%{_datadir}/applications/kcm_kwin_scripts.desktop
+%{_datadir}/applications/kcm_kwin_virtualdesktops.desktop
+%{_datadir}/applications/kcm_kwindecoration.desktop
+%{_datadir}/applications/kcm_kwinoptions.desktop
+%{_datadir}/applications/kcm_kwinrules.desktop
+%{_datadir}/applications/kcm_kwinscreenedges.desktop
+%{_datadir}/applications/kcm_kwintouchscreen.desktop
+%{_datadir}/applications/kcm_virtualkeyboard.desktop
+%{_datadir}/applications/kwincompositing.desktop
+%{_datadir}/kpackage/kcms/kcm_kwin_scripts/contents/ui/main.qml
 
 %files x11
 %{_bindir}/kwin_x11
