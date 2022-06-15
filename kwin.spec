@@ -57,6 +57,7 @@ BuildRequires: pkgconfig(Qt5Sensors)
 BuildRequires: pkgconfig(Qt5UiTools)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5X11Extras)
+BuildRequires: pkgconfig(Qt5Test)
 BuildRequires: pkgconfig(freetype2)
 BuildRequires: pkgconfig(fontconfig)
 BuildRequires: pkgconfig(libinput)
@@ -114,6 +115,7 @@ BuildRequires: cmake(QAccessibilityClient)
 BuildRequires: cmake(KF5Runner)
 BuildRequires: cmake(Qt5XkbCommonSupport)
 BuildRequires: cmake(Qt5ServiceSupport)
+BuildRequires: cmake(PlasmaWaylandProtocols)
 BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(lcms2)
 BuildRequires: pkgconfig(libpipewire-0.3)
@@ -121,6 +123,7 @@ BuildRequires: x11-server-xwayland
 BuildRequires: qt5-qtvirtualkeyboard
 BuildRequires: qt5-qtwayland
 BuildRequires: qt5-qtquickcontrols
+BuildRequires: qt5-qtwayland-private-devel
 BuildRequires: hwdata
 #BuildRequires: libhybris
 BuildRequires: %mklibname -d -s qt5eventdispatchersupport
@@ -137,7 +140,7 @@ Requires: glib-networking
 %define effectmajor 1
 %define effectname %mklibname kwin4_effect_builtins 1
 Obsoletes: %{effectname} < %{EVRD}
-%if %omvver >= 4050000
+%if %omvver > 4050000
 Requires: %{name}-wayland
 %endif
 
