@@ -1,17 +1,13 @@
-%define effectsmajor 13
-%define effectsname %mklibname keffects %{effectsmajor}
+%define effectsmajor 14
+%define effectsname %mklibname keffects
 %define effectsdname %mklibname keffects -d
 
-%define glutilsmajor 13
-%define glutilsname %mklibname kwinglutils %{glutilsmajor}
+%define glutilsmajor 14
+%define glutilsname %mklibname kwinglutils
 %define glutilsdname %mklibname kwinglutils -d
 
-%define xrenderutilsmajor 13
-%define xrenderutilsname %mklibname kwinxrenderutils %{xrenderutilsmajor}
-%define xrenderutilsdname %mklibname kwinxrenderutils -d
-
 %define kcmkwincommonmajor 5
-%define kcmkwincommon %mklibname kcmkwincommon %{kcmkwincommonmajor}
+%define kcmkwincommon %mklibname kcmkwincommon
 
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
@@ -22,8 +18,8 @@
 
 Summary: The KWin window manager
 Name: kwin
-Version: 5.25.5
-Release: 2
+Version: 5.25.90
+Release: 1
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
@@ -195,22 +191,11 @@ Obsoletes: %{mklibname kwinglutils 12} < 5.20.90
 %description -n %{glutilsname}
 KWin GL utils library.
 
-%package -n %{xrenderutilsname}
-Summary: KWin XRender utils library
-Group: System/Libraries
-Requires: %{name} = %{EVRD}
-Obsoletes: %{mklibname kwinxrenderutils 7} < 5.6.0
-Obsoletes: %{mklibname kwinxrenderutils 8} < 5.8.2
-Obsoletes: %{mklibname kwinxrenderutils 11} < 5.14.90
-Obsoletes: %{mklibname kwinxrenderutils 12} < 5.20.90
-
-%description -n %{xrenderutilsname}
-KWin XRender utils library.
-
 %package -n %{kcmkwincommon}
 Summary: KWin KCM library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
+%rename %{mklibname kcmkwincommon 5}
 
 %description -n %{kcmkwincommon}
 KWin KCM library.
@@ -220,10 +205,8 @@ Summary: Development files for the KDE Frameworks 5 Win library
 Group: Development/KDE and Qt
 Requires: %{effectsname} = %{EVRD}
 Requires: %{glutilsname} = %{EVRD}
-Requires: %{xrenderutilsname} = %{EVRD}
 Provides: %{effectsdname} = %{EVRD}
 Provides: %{glutilsdname} = %{EVRD}
-Provides: %{xrenderutilsdname} = %{EVRD}
 
 %description devel
 Development files for the KDE Frameworks 5 Win library.
@@ -247,6 +230,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %find_lang %{name} --all-name --with-html --with-man
 
 %files -f %{name}.lang
+%{_datadir}/applications/kcm_kwintabbox.desktop
 %{_datadir}/config.kcfg/*
 %{_datadir}/kconf_update/*.upd
 %{_datadir}/kconf_update/*.pl
@@ -263,7 +247,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/qt5/plugins/kwin
 %{_libdir}/qt5/plugins/org.kde.kdecoration2
 %{_libdir}/qt5/plugins/kpackage/*
-%dir %{_libdir}/qt5/plugins/org.kde.kwin.platforms
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
 %{_datadir}/qlogging-categories5/*
@@ -292,21 +275,17 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/applications/kcm_kwindecoration.desktop
 %{_datadir}/applications/kcm_kwinoptions.desktop
 %{_datadir}/applications/kcm_kwinrules.desktop
-%{_datadir}/applications/kcm_kwinscreenedges.desktop
-%{_datadir}/applications/kcm_kwintouchscreen.desktop
 %{_datadir}/applications/kcm_virtualkeyboard.desktop
 %{_datadir}/applications/kwincompositing.desktop
 %{_datadir}/kpackage/kcms/kcm_kwin_scripts/contents/ui/main.qml
 
 %files x11
 %{_bindir}/kwin_x11
-%{_libdir}/qt5/plugins/org.kde.kwin.platforms/KWinX11Platform.so
 %{_prefix}/lib/systemd/user/plasma-kwin_x11.service
 
 %files wayland
 %caps(cap_sys_resource+ep) %{_bindir}/kwin_wayland
 %{_bindir}/kwin_wayland_wrapper
-%{_libdir}/qt5/plugins/org.kde.kwin.waylandbackends
 %{_prefix}/lib/systemd/user/plasma-kwin_wayland.service
 
 %files -n %{effectsname}
@@ -317,10 +296,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/libkwingl*utils.so.%{glutilsmajor}
 %{_libdir}/libkwingl*utils.so.%{plasmaver}
 
-%files -n %{xrenderutilsname}
-%{_libdir}/libkwinxrenderutils.so.%{xrenderutilsmajor}
-%{_libdir}/libkwinxrenderutils.so.%{plasmaver}
-
 %files -n %{kcmkwincommon}
 %{_libdir}/libkcmkwincommon.so.%{kcmkwincommonmajor}
 %{_libdir}/libkcmkwincommon.so.%{plasmaver}
@@ -329,6 +304,5 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_includedir}/*
 %{_libdir}/libkwineffects.so
 %{_libdir}/libkwingl*utils.so
-%{_libdir}/libkwinxrenderutils.so
 %{_libdir}/cmake/KWinDBusInterface
 %{_libdir}/cmake/KWinEffects
