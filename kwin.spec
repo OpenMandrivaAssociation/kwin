@@ -139,6 +139,10 @@ Obsoletes: %{effectname} < %{EVRD}
 %if %omvver > 4050000
 Requires: %{name}-wayland
 %endif
+Obsoletes: %{mklibname kwinglutils 13}
+Obsoletes: %{mklibname kwinglutils 13}-debuginfo
+Obsoletes: %{mklibname kwinxrenderutils 13}
+Obsoletes: %{mklibname kwinxrenderutils 13}-debuginfo
 
 %description
 The KWin window manager.
@@ -175,6 +179,8 @@ Summary: KWin effects library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname kwineffects 12} < 5.20.90
+Obsoletes: %{mklibname kwineffects 13} < 5.25.90
+Obsoletes: %{mklibname kwineffects 13}-debuginfo < 5.25.90
 
 %description -n %{effectsname}
 KWin effects library.
@@ -196,6 +202,7 @@ Summary: KWin KCM library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
 %rename %{mklibname kcmkwincommon 5}
+Obsoletes: %{mklibname kcmkwincommon 5}-debuginfo < 5.25.90
 
 %description -n %{kcmkwincommon}
 KWin KCM library.
