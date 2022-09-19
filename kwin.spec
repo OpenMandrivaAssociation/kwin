@@ -179,8 +179,8 @@ Summary: KWin effects library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
 Obsoletes: %{mklibname kwineffects 12} < 5.20.90
-Obsoletes: %{mklibname kwineffects 13} < 5.25.90
-Obsoletes: %{mklibname kwineffects 13}-debuginfo < 5.25.90
+Obsoletes: %{mklibname keffects 13} < 5.25.90
+Obsoletes: %{mklibname keffects 13}-debuginfo < 5.25.90
 
 %description -n %{effectsname}
 KWin effects library.
