@@ -18,8 +18,8 @@
 
 Summary: The KWin window manager
 Name: kwin
-Version: 5.26.2.1
-Release: 2
+Version: 5.26.3
+Release: 1
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
