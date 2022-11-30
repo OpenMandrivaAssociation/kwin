@@ -106,7 +106,6 @@ BuildRequires: cmake(KF5GlobalAccel)
 BuildRequires: cmake(KScreenLocker)
 BuildRequires: cmake(Breeze)
 BuildRequires: cmake(KF5Kirigami2)
-BuildRequires: cmake(KWaylandServer)
 BuildRequires: cmake(QAccessibilityClient)
 BuildRequires: cmake(KF5Runner)
 BuildRequires: cmake(Qt5XkbCommonSupport)
@@ -167,7 +166,6 @@ Requires: kwayland-integration
 Requires: %{_lib}qt5-output-driver-default
 Requires: xwayland
 Requires: kwindowsystem-wayland
-Requires: kwayland-server
 Requires: libkscreen-wayland
 Group: System/Libraries
 
