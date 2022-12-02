@@ -139,7 +139,7 @@ diff -up kwin-5.25.0/src/libkwineffects/kwinglplatform.cpp.1~ kwin-5.25.0/src/li
  
      if (isPanfrost()) {
          m_recommendedCompositor = OpenGLCompositing;
-+        if (m_chipClass <= MaliT8XX) {
++        if (m_chipClass <= MaliT7XX) {
 +            // As of Linux 5.12, Mesa 21.1, GLSL works but causes dramatic FPS drop on this GPU
 +            m_supportsGLSL = false;
 +        }
