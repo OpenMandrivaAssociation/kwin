@@ -18,7 +18,7 @@
 
 Summary: The KWin window manager
 Name: kwin
-Version: 5.26.5
+Version: 5.27.0
 Release: 1
 URL: http://kde.org/
 License: GPL
@@ -84,6 +84,7 @@ BuildRequires: pkgconfig(xcb-xtest)
 BuildRequires: pkgconfig(xcb-event)
 BuildRequires: pkgconfig(xcursor)
 BuildRequires: pkgconfig(xkbcommon)
+BuildRequires: pkgconfig(xkbcommon-x11)
 BuildRequires: pkgconfig(xi)
 BuildRequires: pkgconfig(sm)
 BuildRequires: pkgconfig(libcap)
@@ -242,7 +243,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_datadir}/kconf_update/*.py
 %{_datadir}/kconf_update/*.sh
 %{_datadir}/kwin
-%{_datadir}/kservices5/*
 %{_datadir}/kservicetypes5/*
 %{_datadir}/knotifications5/*
 %{_datadir}/kpackage/kcms/kcm_kwin_virtualdesktops
@@ -292,6 +292,9 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %caps(cap_sys_resource+ep) %{_bindir}/kwin_wayland
 %{_bindir}/kwin_wayland_wrapper
 %{_prefix}/lib/systemd/user/plasma-kwin_wayland.service
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_kwinxwayland.so
+%{_datadir}/applications/kcm_kwinxwayland.desktop
+%{_datadir}/kpackage/kcms/kcm_kwinxwayland/contents/ui/main.qml
 
 %files -n %{effectsname}
 %{_libdir}/libkwineffects.so.%{effectsmajor}
