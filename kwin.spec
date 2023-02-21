@@ -18,7 +18,7 @@
 
 Summary: The KWin window manager
 Name: kwin
-Version: 5.27.0
+Version: 5.27.1
 Release: 1
 URL: http://kde.org/
 License: GPL
@@ -28,9 +28,6 @@ Source1000: %{name}.rpmlintrc
 #Patch0: kwin-5.10.3-workaround-clang-bug-33617.patch
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
-# (tpg) this patch add supports for Panfrost Mali driver just to adjust supported effects
-# (bero) extended the patch to do the same for Lima, VC4 and VC3D
-Patch100: kwin-5.21.4-add-support-for-panfrost-driver.patch
 
 BuildRequires: qt5-qtmultimedia
 # Some of the cmake(*) stuff below is provided by both kdelibs4-devel and
