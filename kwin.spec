@@ -19,7 +19,7 @@
 Summary: The KWin window manager
 Name: kwin
 Version: 5.27.3
-Release: 1
+Release: 2
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
@@ -286,7 +286,7 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_prefix}/lib/systemd/user/plasma-kwin_x11.service
 
 %files wayland
-%caps(cap_sys_resource+ep) %{_bindir}/kwin_wayland
+%caps(cap_sys_nice+ep) %{_bindir}/kwin_wayland
 %{_bindir}/kwin_wayland_wrapper
 %{_prefix}/lib/systemd/user/plasma-kwin_wayland.service
 %{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_kwinxwayland.so
