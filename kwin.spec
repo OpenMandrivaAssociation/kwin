@@ -98,11 +98,11 @@ BuildRequires: cmake(KF5Notifications)
 BuildRequires: cmake(KF5Plasma)
 BuildRequires: cmake(KF5PlasmaQuick)
 BuildRequires: cmake(KF5Wayland)
-BuildRequires: cmake(KDecoration2)
+BuildRequires: cmake(KDecoration2) < 5.27.50
 BuildRequires: cmake(KF5IdleTime)
 BuildRequires: cmake(KF5GlobalAccel)
-BuildRequires: cmake(KScreenLocker)
-BuildRequires: cmake(Breeze)
+BuildRequires: cmake(KScreenLocker) < 5.27.50
+BuildRequires: cmake(Breeze) < 5.27.50
 BuildRequires: cmake(KF5Kirigami2)
 BuildRequires: cmake(QAccessibilityClient)
 BuildRequires: cmake(KF5Runner)
