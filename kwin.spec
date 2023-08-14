@@ -19,7 +19,7 @@
 Summary: The KWin window manager
 Name: kwin
 Version: 5.27.7
-Release: 1
+Release: 2
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
@@ -133,9 +133,6 @@ Requires: glib-networking
 %define effectmajor 1
 %define effectname %mklibname kwin4_effect_builtins 1
 Obsoletes: %{effectname} < %{EVRD}
-%if %omvver > 4050000
-Requires: %{name}-wayland
-%endif
 Obsoletes: %{mklibname kwinglutils 13}
 Obsoletes: %{mklibname kwinglutils 13}-debuginfo
 Obsoletes: %{mklibname kwinxrenderutils 13}
