@@ -1,14 +1,3 @@
-%define effectsmajor 14
-%define effectsname %mklibname keffects
-%define effectsdname %mklibname keffects -d
-
-%define glutilsmajor 14
-%define glutilsname %mklibname kwinglutils
-%define glutilsdname %mklibname kwinglutils -d
-
-%define kcmkwincommonmajor 5
-%define kcmkwincommon %mklibname kcmkwincommon
-
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
@@ -137,6 +126,10 @@ Obsoletes: %{mklibname kwinglutils 13}
 Obsoletes: %{mklibname kwinglutils 13}-debuginfo
 Obsoletes: %{mklibname kwinxrenderutils 13}
 Obsoletes: %{mklibname kwinxrenderutils 13}-debuginfo
+Obsoletes: %{mklibname kwinglutils}
+Obsoletes: %{mklibname keffects}
+Obsoletes: %{mklibname kcmkwincommon}
+Obsoletes: %{mklibname kwin}
 
 %description
 The KWin window manager.
@@ -167,51 +160,12 @@ Group: System/Libraries
 %description wayland
 Wayland Window System support for KWin.
 
-%package -n %{effectsname}
-Summary: KWin effects library
-Group: System/Libraries
-Requires: %{name} = %{EVRD}
-Obsoletes: %{mklibname kwineffects 12} < 5.20.90
-Obsoletes: %{mklibname keffects 13} < 5.25.90
-Obsoletes: %{mklibname keffects 13}-debuginfo < 5.25.90
-
-%description -n %{effectsname}
-KWin effects library.
-
-%package -n %{glutilsname}
-Summary: KWin GL utils library
-Group: System/Libraries
-Requires: %{name} = %{EVRD}
-Obsoletes: %{mklibname kwinglutils 7} < 5.6.0
-Obsoletes: %{mklibname kwinglutils 8} < 5.8.2
-Obsoletes: %{mklibname kwinglutils 11} < 5.14.90
-Obsoletes: %{mklibname kwinglutils 12} < 5.20.90
-
-%description -n %{glutilsname}
-KWin GL utils library.
-
-%package -n %{kcmkwincommon}
-Summary: KWin KCM library
-Group: System/Libraries
-Requires: %{name} = %{EVRD}
-%rename %{mklibname kcmkwincommon 5}
-Obsoletes: %{mklibname kcmkwincommon 5}-debuginfo < 5.25.90
-
-%description -n %{kcmkwincommon}
-KWin KCM library.
-
 %package devel
 Summary: Development files for the KDE Frameworks 5 Win library
 Group: Development/KDE and Qt
-Requires: %{effectsname} = %{EVRD}
-Requires: %{glutilsname} = %{EVRD}
-Provides: %{effectsdname} = %{EVRD}
-Provides: %{glutilsdname} = %{EVRD}
 
 %description devel
 Development files for the KDE Frameworks 5 Win library.
-
-%libpackage kwin 5
 
 %prep
 %autosetup -p1
@@ -248,6 +202,10 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/qt5/plugins/kpackage/*
 %{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libdir}/libexec/kwin*
+%{_libdir}/libkwineffects.so.*
+%{_libdir}/libkwingl*utils.so.*
+%{_libdir}/libkwin.so.*
+%{_libdir}/libkcmkwincommon.so.*
 %{_datadir}/qlogging-categories5/*
 %{_datadir}/knsrcfiles/*.knsrc
 %{_datadir}/kpackage/kcms/kcm_kwin_effects
@@ -289,18 +247,6 @@ ln -s %{_datadir}/kservicetypes5/kwinscript.desktop %{buildroot}%{_datadir}/kser
 %{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_kwinxwayland.so
 %{_datadir}/applications/kcm_kwinxwayland.desktop
 %{_datadir}/kpackage/kcms/kcm_kwinxwayland/contents/ui/main.qml
-
-%files -n %{effectsname}
-%{_libdir}/libkwineffects.so.%{effectsmajor}
-%{_libdir}/libkwineffects.so.%{plasmaver}
-
-%files -n %{glutilsname}
-%{_libdir}/libkwingl*utils.so.%{glutilsmajor}
-%{_libdir}/libkwingl*utils.so.%{plasmaver}
-
-%files -n %{kcmkwincommon}
-%{_libdir}/libkcmkwincommon.so.%{kcmkwincommonmajor}
-%{_libdir}/libkcmkwincommon.so.%{plasmaver}
 
 %files devel
 %{_includedir}/*
