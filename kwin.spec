@@ -9,7 +9,7 @@ Summary: The KWin window manager
 Name: kwin
 Version: 5.27.11
 Release: 2
-URL: http://kde.org/
+URL: https://kde.org/
 License: GPL
 Group: System/Libraries
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
