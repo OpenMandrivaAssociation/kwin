@@ -10,7 +10,7 @@
 Summary: The KWin window manager
 Name: plasma6-kwin
 Version: 6.3.4
-Release: %{?git:0.%{git}.}3
+Release: %{?git:0.%{git}.}4
 URL: https://kde.org/
 License: GPL
 Group: System/Libraries
@@ -133,6 +133,8 @@ BuildSystem: cmake
 BuildOption: -DBUILD_QCH:BOOL=ON
 BuildOption: -DBUILD_WITH_QT6:BOOL=ON
 BuildOption: -DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+# Renamed 2025-05-01 after 6.0
+%rename plasma6-kwin
 
 %description
 The KWin window manager.
@@ -142,6 +144,8 @@ Summary: X11 Window System support for KWin
 Requires: %{name} = %{EVRD}
 Provides: %{name}-windowsystem = %{EVRD}
 Group: System/Libraries
+# Renamed 2025-05-01 after 6.0
+%rename plasma6-kwin-x11
 
 %description x11
 X11 Window System support for KWin.
@@ -153,6 +157,8 @@ Provides: %{name}-windowsystem = %{EVRD}
 Requires: %mklibname Qt6WaylandCompositor
 Requires: %mklibname Qt6WlShellIntegration
 Group: System/Libraries
+# Renamed 2025-05-01 after 6.0
+%rename plasma6-kwin-wayland
 
 %description wayland
 Wayland Window System support for KWin.
@@ -160,6 +166,8 @@ Wayland Window System support for KWin.
 %package devel
 Summary: Development files for the KDE Frameworks 5 Win library
 Group: Development/KDE and Qt
+# Renamed 2025-05-01 after 6.0
+%rename plasma6-kwin-devel
 
 %description devel
 Development files for the KDE Frameworks 5 Win library.
