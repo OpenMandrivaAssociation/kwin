@@ -9,8 +9,8 @@
 
 Summary: The KWin window manager
 Name: plasma6-kwin
-Version: 6.3.4
-Release: %{?git:0.%{git}.}4
+Version: 6.3.5
+Release: %{?git:0.%{git}.}1
 URL: https://kde.org/
 License: GPL
 Group: System/Libraries
@@ -22,7 +22,6 @@ Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/kwin-%{version}.t
 Patch0: kwin-6.3.3-wayland-egl-is-wayland.patch
 # (tpg) is it still needed ?
 #Patch1: kwin-5.3.0-enable-minimizeall.patch
-Patch2:	https://invent.kde.org/plasma/kwin/-/commit/93bf2f98ae22e654d997c7140b7fe9936fa3f2d3.patch
 
 BuildRequires: appstream
 BuildRequires: pkgconfig(egl)
