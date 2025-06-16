@@ -9,7 +9,7 @@
 
 Summary: The KWin window manager
 Name: plasma6-kwin
-Version: 6.3.5
+Version: 6.4.0
 Release: %{?git:0.%{git}.}1
 URL: https://kde.org/
 License: GPL
@@ -138,17 +138,6 @@ BuildOption: -DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 %description
 The KWin window manager.
 
-%package x11
-Summary: X11 Window System support for KWin
-Requires: %{name} = %{EVRD}
-Provides: %{name}-windowsystem = %{EVRD}
-Group: System/Libraries
-# Renamed 2025-05-01 after 6.0
-%rename plasma6-kwin-x11
-
-%description x11
-X11 Window System support for KWin.
-
 %package wayland
 Summary: Wayland Window System support for KWin
 Requires: %{name} = %{EVRD}
@@ -174,7 +163,6 @@ Development files for the KDE Frameworks 5 Win library.
 %files -f %{name}.lang
 %{_datadir}/applications/kcm_kwintabbox.desktop
 %{_datadir}/config.kcfg/*
-%{_datadir}/kwin
 %{_datadir}/knotifications6/*
 %{_datadir}/icons/*/*/*/*
 %{_datadir}/dbus-1/*/*
@@ -182,7 +170,6 @@ Development files for the KDE Frameworks 5 Win library.
 %{_qtdir}/plugins/kf6/packagestructure/*
 %{_qtdir}/qml/org/kde/kwin
 %{_qtdir}/plugins/kwin
-%{_qtdir}/plugins/org.kde.kdecoration3/*
 %{_libdir}/libexec/kwin*
 %{_datadir}/qlogging-categories6/*
 %{_datadir}/knsrcfiles/*.knsrc
@@ -197,8 +184,6 @@ Development files for the KDE Frameworks 5 Win library.
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwinscreenedges.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwintabbox.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwintouchscreen.so
-%{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kwincompositing.so
-%{_qtdir}/plugins/org.kde.kdecoration3.kcm/kcm_auroraedecoration.so
 %{_datadir}/applications/kcm_kwin_effects.desktop
 %{_datadir}/applications/kcm_kwin_scripts.desktop
 %{_datadir}/applications/kcm_kwin_virtualdesktops.desktop
@@ -206,7 +191,6 @@ Development files for the KDE Frameworks 5 Win library.
 %{_datadir}/applications/kcm_kwinoptions.desktop
 %{_datadir}/applications/kcm_kwinrules.desktop
 %{_datadir}/applications/kcm_virtualkeyboard.desktop
-%{_datadir}/applications/kwincompositing.desktop
 %{_datadir}/applications/org.kde.kwin.killer.desktop
 %{_libdir}/libkcmkwincommon.so*
 %{_libdir}/libkwin.so*
@@ -215,10 +199,8 @@ Development files for the KDE Frameworks 5 Win library.
 %{_libdir}/kconf_update_bin/kwin-6.0-reset-active-mouse-screen
 %{_libdir}/kconf_update_bin/kwin-6.0-remove-breeze-tabbox-default
 %{_libdir}/kconf_update_bin/kwin-6.1-remove-gridview-expose-shortcuts
-
-%files x11
-%{_bindir}/kwin_x11
-%{_prefix}/lib/systemd/user/plasma-kwin_x11.service
+%{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_animations.so
+%{_datadir}/applications/kcm_animations.desktop
 
 %files wayland
 %caps(cap_sys_nice+ep) %{_bindir}/kwin_wayland
@@ -226,6 +208,7 @@ Development files for the KDE Frameworks 5 Win library.
 %{_prefix}/lib/systemd/user/plasma-kwin_wayland.service
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_kwinxwayland.so
 %{_datadir}/applications/kcm_kwinxwayland.desktop
+%{_datadir}/kwin-wayland
 
 %files devel
 %{_includedir}/*
