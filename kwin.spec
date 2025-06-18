@@ -8,7 +8,7 @@
 %global optflags %{optflags} -O3
 
 Summary: The KWin window manager
-Name: plasma6-kwin
+Name: kwin
 Version: 6.4.0
 Release: %{?git:0.%{git}.}1
 URL: https://kde.org/
@@ -120,7 +120,6 @@ BuildRequires: cmake(VulkanHeaders)
 BuildRequires: x11-server-xwayland
 BuildRequires: hwdata
 #BuildRequires: libhybris
-Requires: %{name}-windowsystem = %{EVRD}
 Requires: libplasma plasma-framework-common
 #(tpg) this is needed for kcm_kwin_effects
 Requires: glib-networking
@@ -132,24 +131,14 @@ BuildSystem: cmake
 BuildOption: -DBUILD_QCH:BOOL=ON
 BuildOption: -DBUILD_WITH_QT6:BOOL=ON
 BuildOption: -DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+Requires: %mklibname Qt6WaylandCompositor
+Requires: %mklibname Qt6WlShellIntegration
 # Renamed 2025-05-01 after 6.0
 %rename plasma6-kwin
+%rename plasma6-kwin-wayland
 
 %description
 The KWin window manager.
-
-%package wayland
-Summary: Wayland Window System support for KWin
-Requires: %{name} = %{EVRD}
-Provides: %{name}-windowsystem = %{EVRD}
-Requires: %mklibname Qt6WaylandCompositor
-Requires: %mklibname Qt6WlShellIntegration
-Group: System/Libraries
-# Renamed 2025-05-01 after 6.0
-%rename plasma6-kwin-wayland
-
-%description wayland
-Wayland Window System support for KWin.
 
 %package devel
 Summary: Development files for the KDE Frameworks 5 Win library
@@ -201,8 +190,6 @@ Development files for the KDE Frameworks 5 Win library.
 %{_libdir}/kconf_update_bin/kwin-6.1-remove-gridview-expose-shortcuts
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_animations.so
 %{_datadir}/applications/kcm_animations.desktop
-
-%files wayland
 %caps(cap_sys_nice+ep) %{_bindir}/kwin_wayland
 %{_bindir}/kwin_wayland_wrapper
 %{_prefix}/lib/systemd/user/plasma-kwin_wayland.service
