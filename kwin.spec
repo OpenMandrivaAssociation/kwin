@@ -141,13 +141,13 @@ Requires: %mklibname Qt6WlShellIntegration
 The KWin window manager.
 
 %package devel
-Summary: Development files for the KDE Frameworks 5 Win library
+Summary: Development files for the KDE Frameworks Win library
 Group: Development/KDE and Qt
 # Renamed 2025-05-01 after 6.0
 %rename plasma6-kwin-devel
 
 %description devel
-Development files for the KDE Frameworks 5 Win library.
+Development files for the KDE Frameworks Win library.
 
 %files -f %{name}.lang
 %{_datadir}/applications/kcm_kwintabbox.desktop
