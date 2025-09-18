@@ -133,6 +133,7 @@ BuildOption: -DBUILD_WITH_QT6:BOOL=ON
 BuildOption: -DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 Requires: %mklibname Qt6WaylandCompositor
 Requires: %mklibname Qt6WlShellIntegration
+Suggests:	kwin-aurorae
 # Renamed 2025-05-01 after 6.0
 %rename plasma6-kwin
 %rename plasma6-kwin-wayland
