@@ -10,7 +10,7 @@
 Summary: The KWin window manager
 Name: kwin
 Version: 6.4.5
-Release: %{?git:0.%{git}.}2
+Release: %{?git:0.%{git}.}3
 URL: https://kde.org/
 License: GPL
 Group: System/Libraries
