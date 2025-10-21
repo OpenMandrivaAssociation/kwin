@@ -9,8 +9,8 @@
 
 Summary: The KWin window manager
 Name: kwin
-Version: 6.4.5
-Release: %{?git:0.%{git}.}3
+Version: 6.5.0
+Release: %{?git:0.%{git}.}1
 URL: https://kde.org/
 License: GPL
 Group: System/Libraries
@@ -49,6 +49,7 @@ BuildRequires: cmake(Qt6Core5Compat)
 BuildRequires: cmake(KF6DBusAddons)
 BuildRequires: cmake(KF6Service)
 BuildRequires: cmake(KF6Svg)
+BuildRequires: cmake(KNightTime)
 BuildRequires: pkgconfig(freetype2)
 BuildRequires: pkgconfig(fontconfig)
 BuildRequires: pkgconfig(libinput)
@@ -197,6 +198,8 @@ Development files for the KDE Frameworks Win library.
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_kwinxwayland.so
 %{_datadir}/applications/kcm_kwinxwayland.desktop
 %{_datadir}/kwin-wayland
+%{_bindir}/kwindowprop
+%{_libdir}/kconf_update_bin/kwin-6.5-showpaint-changes
 
 %files devel
 %{_includedir}/*
