@@ -9,7 +9,7 @@
 
 Summary: The KWin window manager
 Name: kwin
-Version: 6.6.5
+Version: 6.7.0
 Release: %{?git:0.%{git}.}1
 URL: https://kde.org/
 License: GPL
@@ -182,6 +182,7 @@ Development files for the KDE Frameworks Win library.
 %{_datadir}/applications/kcm_kwinoptions.desktop
 %{_datadir}/applications/kcm_kwinrules.desktop
 %{_datadir}/applications/kcm_virtualkeyboard.desktop
+%{_datadir}/applications/org.kde.kwin.dialoghelper.desktop
 %{_datadir}/applications/org.kde.kwin.killer.desktop
 %{_libdir}/libkcmkwincommon.so*
 %{_libdir}/libkwin.so*
