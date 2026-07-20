@@ -20,9 +20,13 @@ Source0:	https://invent.kde.org/plasma/kwin/-/archive/%{gitbranch}/kwin-%{gitbra
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/kwin-%{version}.tar.xz
 %endif
 Patch0: kwin-6.3.3-wayland-egl-is-wayland.patch
+# Fallback for DMA_BUF_IOCTL_EXPORT_SYNC_FILE when kernel UAPI headers are older than 5.20
+#Patch1: kwin-6.7.3-dma-buf-export-sync-file-fallback.patch
 # (tpg) is it still needed ?
-#Patch1: kwin-5.3.0-enable-minimizeall.patch
+#Patch2: kwin-5.3.0-enable-minimizeall.patch
 
+# Needed for linux/dma-buf.h (DMA_BUF_IOCTL_EXPORT_SYNC_FILE since Linux 5.20)
+BuildRequires: kernel-headers
 BuildRequires: appstream
 BuildRequires: pkgconfig(egl)
 BuildRequires: %{_lib}EGL_mesa-devel
