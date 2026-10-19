@@ -161,7 +161,6 @@ Development files for the KDE Frameworks Win library.
 %{_datadir}/knotifications6/*
 %{_datadir}/icons/*/*/*/*
 %{_datadir}/dbus-1/*/*
-%{_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_qtdir}/plugins/kf6/packagestructure/*
 %{_qtdir}/qml/org/kde/kwin
 %{_qtdir}/plugins/kwin
@@ -175,7 +174,7 @@ Development files for the KDE Frameworks Win library.
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_kwindecoration.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_kwinrules.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_virtualkeyboard.so
-%{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwinoptions.so
+%{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_kwinoptions.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwinscreenedges.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwintabbox.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_kwintouchscreen.so
@@ -202,7 +201,8 @@ Development files for the KDE Frameworks Win library.
 %{_prefix}/lib/systemd/user/plasma-kwin_wayland.service
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_kwinxwayland.so
 %{_datadir}/applications/kcm_kwinxwayland.desktop
-%{_datadir}/kwin-wayland
+%{_datadir}/kwin
+%{_sysconfdir}/xdg/kwinrulesrc
 %{_bindir}/kwindowprop
 %{_libdir}/kconf_update_bin/kwin-6.5-showpaint-changes
 
