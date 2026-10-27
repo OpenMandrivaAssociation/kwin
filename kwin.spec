@@ -202,7 +202,6 @@ Development files for the KDE Frameworks Win library.
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_kwinxwayland.so
 %{_datadir}/applications/kcm_kwinxwayland.desktop
 %{_datadir}/kwin
-%{_sysconfdir}/xdg/kwinrulesrc
 %{_bindir}/kwindowprop
 %{_libdir}/kconf_update_bin/kwin-6.5-showpaint-changes
 
