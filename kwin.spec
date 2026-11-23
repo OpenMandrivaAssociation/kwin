@@ -10,7 +10,7 @@
 Summary: The KWin window manager
 Name: kwin
 Version: 6.8.3
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 URL: https://kde.org/
 License: GPL
 Group: System/Libraries
@@ -24,6 +24,14 @@ Patch0: kwin-6.3.3-wayland-egl-is-wayland.patch
 #Patch1: kwin-6.7.3-dma-buf-export-sync-file-fallback.patch
 # (tpg) is it still needed ?
 #Patch2: kwin-5.3.0-enable-minimizeall.patch
+# 6.8.3 starts libinput inside the InputRedirection constructor, before the
+# singleton is published. Pointer and tablet events in that window crash
+# kwin_wayland. https://bugs.kde.org/show_bug.cgi?id=528824
+Patch3: kwin-6.8.3-init-input-backends-after-redirection.patch
+# The same startup path consumed lid-switch events before the input filters
+# existed, so a lid that was already closed left the internal panel primary.
+# https://bugs.kde.org/show_bug.cgi?id=528936
+Patch4: kwin-6.8.3-libinput-only-device-added-on-startup.patch
 
 # Needed for linux/dma-buf.h (DMA_BUF_IOCTL_EXPORT_SYNC_FILE since Linux 5.20)
 BuildRequires: kernel-headers
